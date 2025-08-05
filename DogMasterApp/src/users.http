@@ -1,0 +1,47 @@
+###
+POST http://localhost:8081/api/v1/users
+Content-Type: application/json
+
+{
+  "firstName": "Filip",
+  "lastName": "Oruzinsky",
+  "address": "Sportova 17,05601 Gelnica",
+  "phoneNumber": "+421915901881",
+  "email": "oruzinskyfilip@gmail.com",
+  "password": "123456"
+
+}
+
+###
+
+GET http://localhost:8081/api/v1/users
+###
+
+GET http://localhost:8081/api/v1/users/userId/1
+###
+
+GET http://localhost:8081/api/v1/users/email/oruzinskyfilip@gmail.com
+###
+
+PATCH http://localhost:8081/api/v1/users/1
+Content-Type: application/json
+
+{
+  "firstName": "Jozo",
+  "lastName": "Mrkva"
+
+}
+
+###
+PUT http://localhost:8081/api/v1/users/1
+Content-Type: application/json
+
+{
+  "lastName": "Jovan",
+  "address": "Sportova 17,05601 Gelnica",
+  "phoneNumber": "+42191593281",
+  "email": "oruzinskyMarek@gmail.com",
+  "password": "123456"
+}
+
+
