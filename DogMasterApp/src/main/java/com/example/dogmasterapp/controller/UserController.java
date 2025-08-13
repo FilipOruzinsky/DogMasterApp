@@ -16,38 +16,9 @@ public class UserController {
 
     private UserService userService;
 
-    @GetMapping
-    List<User> all() {
-        return userService.getAllUsers();
+    @GetMapping("/me")
+        public User getCurrentUser(){
+            return userService.getCurrentUser();
+        }
     }
 
-    @GetMapping("/email/{email}")
-    User findByMail(@PathVariable("email") String email) {
-        return userService.findByEmail(email);
-    }
-
-    @GetMapping("/userId/{userId}")
-    public User findByID(@PathVariable("userId") Integer userId) {
-        return userService.getById(userId);
-    }
-
-    @PostMapping
-    User user(@RequestBody User newUser) {
-        return userService.saveUser(newUser);
-    }
-
-    @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable("userId") Integer userId) {
-        userService.deleteById(userId);
-    }
-
-    @PatchMapping("/{userId}")
-    public User user(@PathVariable("userId") Integer userId, @RequestBody User patchedUser) {
-        return userService.patchedUser(userId, patchedUser);
-    }
-
-    @PutMapping("/{userId}")
-    public User userPut(@PathVariable("userId") Integer userId, @RequestBody User patchedUser) {
-        return userService.updateUser(userId, patchedUser);
-    }
-}

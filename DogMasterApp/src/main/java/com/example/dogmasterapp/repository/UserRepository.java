@@ -4,10 +4,12 @@ import com.example.dogmasterapp.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends JpaRepository<User,Integer> {
+import java.util.Optional;
 
-     User findUserByUserID(Integer userId);
-     User findUserByEmail(String email);
+@Repository
+public interface UserRepository extends JpaRepository<User,String> {
+
+     Optional <User> findUserByUserID(String userId);
+     Optional <User> findUserByEmail(String email);
 
 }

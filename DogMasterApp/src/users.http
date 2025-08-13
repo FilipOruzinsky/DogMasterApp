@@ -3,11 +3,11 @@ POST http://localhost:8081/api/v1/users
 Content-Type: application/json
 
 {
-  "firstName": "Filip",
+  "firstName":"",
   "lastName": "Oruzinsky",
-  "address": "Sportova 17,05601 Gelnica",
+  "address": "",
   "phoneNumber": "+421915901881",
-  "email": "oruzinskyfilip@gmail.com",
+  "email": "oruzinskyfilipgmail.com",
   "password": "123456"
 
 }
@@ -43,5 +43,15 @@ Content-Type: application/json
   "email": "oruzinskyMarek@gmail.com",
   "password": "123456"
 }
+###
+POST http://localhost:8180/realms/DogMasterApp-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
 
+grant_type=password
+    &client_id=DogMasterApp-client
+    &username=userwtichroleuser
+    &password=user
+###
+ GET http://localhost:8081/api/v1/users/me
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJOMVE4a25qUmlscVRqcWtSTGFTZkNlZnZvWjdQWFdub280Z19yU3dodWZFIn0.eyJleHAiOjE3NTQ2OTY0MTcsImlhdCI6MTc1NDY2MDQxNywianRpIjoib25ydHJvOmI2ZDcxM2EzLWJkZTQtODY0NS01YmZjLWZkNDk0MTJjMWNlZCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODE4MC9yZWFsbXMvRG9nTWFzdGVyQXBwLXJlYWxtIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjJmZDM0ZTY0LTY1ZWMtNDI2MS1hMWM0LTQ4ZDExOWQ3MzI3NyIsInR5cCI6IkJlYXJlciIsImF6cCI6IkRvZ01hc3RlckFwcC1jbGllbnQiLCJzaWQiOiJjZTk2OTRlYy03YTVmLTQ5YzctYmZhNC02M2M2NjlmNDEyY2IiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWRvZ21hc3RlcmFwcC1yZWFsbSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJEb2dNYXN0ZXJBcHAtY2xpZW50Ijp7InJvbGVzIjpbIlVTRVIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlVzZXIgVGVzdFVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2Vyd3RpY2hyb2xldXNlciIsImdpdmVuX25hbWUiOiJVc2VyIiwiZmFtaWx5X25hbWUiOiJUZXN0VXNlciIsImVtYWlsIjoidXNlckBnbWFsLmNvbSJ9.jBdTG82HoyzOn4hECUkqYkNp1nz52qGQP5kdwCIhGceUpCGwP5O1_zhiB0W0KMl7FUCIovuqPmQ0DtGsRCEUuLNeBUIp3BLNdDwlDyXF5AfI_zXui3Wkkep4xsplhufb7llsqzu2X81RTZWnKLX5YZlkiNz2rWLpDKL3sicfnWUEPpK_GF4Vvcydz9UKmS1cYYTXMMNkmJERr82vMe5LiPBIMdtNQCPGkEywSTwZqfV1qDTGXWid-i_Yil0dwZEU0uJlzV5Lut8dM3-1zdeIip05DY0jFFfXXvxil8PHVHCE864xgSAkfpPbJ0Mu8AJfeu27EZdC0pBYC1wIqW8Cdw
 
