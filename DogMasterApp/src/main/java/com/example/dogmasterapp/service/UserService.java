@@ -22,6 +22,9 @@ public class UserService {
         user.setEmail(jwt.getClaimAsString("email"));
         user.setFirstName(jwt.getClaimAsString("given_name"));
         user.setLastName(jwt.getClaimAsString("family_name"));
+        user.setAddress(jwt.getClaimAsString("address"));
+        user.setPhoneNumber(jwt.getClaimAsString("phone_number"));
+
 
         return userRepository.save(user);
     }
