@@ -1,0 +1,48 @@
+###
+# Create a new Dog
+POST http://localhost:8081/api/v1/dogs
+Authorization: Bearer <your_access_token>
+Content-Type: application/json
+
+{
+  "name": "Buddy",
+  "breed": "Labrador Retriever",
+  "age": 4
+}
+
+###
+
+# Get a Dog by ID
+GET http://localhost:8081/api/v1/dogs/1
+Authorization: Bearer <your_access_token>
+
+###
+
+# Get all Dogs
+GET http://localhost:8081/api/v1/dogs
+Authorization: Bearer <your_access_token>
+
+###
+
+# Get all Dogs by Owner ID
+GET http://localhost:8081/api/v1/dogs/owner/ownerID123
+Authorization: Bearer <your_access_token>
+
+###
+
+# Update an existing Dog
+PUT http://localhost:8081/api/v1/dogs/1
+Authorization: Bearer <your_access_token>
+Content-Type: application/json
+
+{
+  "name": "Max",
+  "breed": "Golden Retriever",
+  "age": 5
+}
+
+###
+
+# Delete a Dog by ID
+DELETE http://localhost:8081/api/v1/dogs/1
+Authorization: Bearer <your_access_token>

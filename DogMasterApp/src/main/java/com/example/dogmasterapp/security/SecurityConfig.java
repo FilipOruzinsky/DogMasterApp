@@ -8,9 +8,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Configuration
 @EnableWebSecurity
@@ -38,13 +46,39 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
-        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
-
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
-        return jwtAuthenticationConverter;
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(this::keycloakAuthorities);
+        return converter;
     }
 
+    private Collection<GrantedAuthority> keycloakAuthorities(Jwt jwt) {
+        Set<String> roles = new HashSet<>();
+
+        // 1) Realm roles
+        Map<String, Object> realmAccess = jwt.getClaimAsMap("realm_access");
+        if (realmAccess != null) {
+            Object realmRoles = realmAccess.get("roles");
+            if (realmRoles instanceof Collection<?> rr) {
+                rr.stream().map(String::valueOf).forEach(roles::add);
+            }
+        }
+
+        // 2) Client roles from resource_access[{azp}].roles
+        Map<String, Object> resourceAccess = jwt.getClaimAsMap("resource_access");
+        if (resourceAccess != null) {
+            String clientId = jwt.getClaimAsString("azp"); // "dog-master-client" in your token
+            Object clientObj = resourceAccess.get(clientId);
+            if (clientObj instanceof Map<?, ?> clientMap) {
+                Object clientRoles = ((Map<?, ?>) clientMap).get("roles");
+                if (clientRoles instanceof Collection<?> cr) {
+                    cr.stream().map(String::valueOf).forEach(roles::add);
+                }
+            }
+        }
+
+        return roles.stream()
+                .map(r -> r.startsWith("ROLE_") ? r : "ROLE_" + r)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
+    }
 }
