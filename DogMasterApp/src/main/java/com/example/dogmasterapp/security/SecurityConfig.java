@@ -69,7 +69,7 @@ public class SecurityConfig {
             String clientId = jwt.getClaimAsString("azp"); // "dog-master-client" in your token
             Object clientObj = resourceAccess.get(clientId);
             if (clientObj instanceof Map<?, ?> clientMap) {
-                Object clientRoles = ((Map<?, ?>) clientMap).get("roles");
+                Object clientRoles = clientMap.get("roles");
                 if (clientRoles instanceof Collection<?> cr) {
                     cr.stream().map(String::valueOf).forEach(roles::add);
                 }
