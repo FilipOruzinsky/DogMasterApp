@@ -1,0 +1,3 @@
+keycloack realm - DogMasterApp-realm
+keycloack client - DogMasterApp-client
+foruzins ma aj admin aj user rolu
