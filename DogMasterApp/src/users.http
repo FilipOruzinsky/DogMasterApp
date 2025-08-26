@@ -48,7 +48,7 @@ POST http://localhost:8180/realms/DogMasterApp-realm/protocol/openid-connect/tok
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password
-    &client_id=DogMasterApp-client
+    &client_id=dog-master-client
     &username=userwtichroleuser
     &password=user
 ###
