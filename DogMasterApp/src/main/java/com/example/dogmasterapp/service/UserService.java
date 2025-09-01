@@ -17,6 +17,7 @@ public class UserService {
         User user = new User();
 
         user.setUserID(jwt.getSubject());
+        user.setUserName(jwt.getClaimAsString("preferred_username"));
         user.setEmail(jwt.getClaimAsString("email"));
         user.setFirstName(jwt.getClaimAsString("given_name"));
         user.setLastName(jwt.getClaimAsString("family_name"));

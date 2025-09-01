@@ -45,4 +45,11 @@ public class DogService {
     public void deleteDogById(Integer dogId) {
         dogRepository.deleteById(dogId);
     }
+
+    public Dog changeOwner(Integer dogID) {
+        Dog existingDog = dogRepository.findById(dogID).orElseThrow(() -> new EntityNotFoundException("Dog not found with id: " + dogID));
+        existingDog.setOwner(userService.getCurrentUser());
+        return dogRepository.save(existingDog);
+
+    }
 }

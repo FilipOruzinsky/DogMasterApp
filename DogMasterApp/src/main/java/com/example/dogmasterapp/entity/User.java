@@ -16,6 +16,7 @@ import java.util.List;
 public class User {
     @Id
     public String userID;
+    public String userName;
     public String firstName;
     public String lastName;
     public String address;

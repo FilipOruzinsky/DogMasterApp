@@ -38,6 +38,12 @@ public class DogController {
     public ResponseEntity<Dog> updateDog(@PathVariable Integer id, @RequestBody Dog dog) {
         return ResponseEntity.ok(dogService.updateDog(id, dog));
     }
+    @PutMapping("/changeOwner/{dogID}")
+    public ResponseEntity<Dog> changeOwner(@PathVariable Integer dogID) {
+        return ResponseEntity.ok(dogService.changeOwner(dogID));
+    }
+
+
 
     @DeleteMapping("/{id}")
     public void deleteDogById(@PathVariable Integer id) {
