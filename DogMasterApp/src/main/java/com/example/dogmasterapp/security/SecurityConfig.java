@@ -36,6 +36,7 @@ public class SecurityConfig {
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                        .authenticationEntryPoint(new CustomAuthEntryPoint())
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -81,4 +82,5 @@ public class SecurityConfig {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
     }
+
 }
