@@ -1,9 +1,7 @@
 package com.example.dogmasterapp.service;
 
-import com.example.dogmasterapp.entity.Dog;
 import com.example.dogmasterapp.entity.User;
 import com.example.dogmasterapp.repository.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
