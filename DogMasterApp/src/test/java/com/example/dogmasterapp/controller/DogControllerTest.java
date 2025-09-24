@@ -103,7 +103,7 @@ class DogControllerTest {
 
     @Test
     public void shouldGetDogsByOwner() throws Exception {
-        // create as test-user-c (owner will be set by service)
+        // create as test-user-c (service will set an owner)
         Dog rex = new Dog();
         rex.setName("Rex");
         rex.setAge(3);
@@ -216,7 +216,7 @@ class DogControllerTest {
 
         String userB = "user-B";
 
-        mockMvc.perform(put("/api/v1/dogs/change-owner/{dogID}", dogId)
+        mockMvc.perform(post("/api/v1/dogs/change-owner/{dogID}", dogId)
                         .with(jwtWithSub(userB))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -235,7 +235,7 @@ class DogControllerTest {
     public void shouldReturnNotFound_whenChangeOwnerOfNonExistingDog() throws Exception {
         int nonExistingId = 123456789;
 
-        mockMvc.perform(put("/api/v1/dogs/change-owner/{dogID}", nonExistingId)
+        mockMvc.perform(post("/api/v1/dogs/change-owner/{dogID}", nonExistingId)
                         .with(jwtWithSub("some-user"))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
