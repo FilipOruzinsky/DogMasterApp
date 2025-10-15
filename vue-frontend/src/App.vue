@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import keycloak from '@/keycloak.ts'
+
+const logout = () => {
+  keycloak.logout({ redirectUri: window.location.origin })
+}
+</script>
 
 <template>
   <h1>You did it!</h1>
@@ -6,6 +12,7 @@
     Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
     documentation
   </p>
+  <button @click="logout">Logout</button>
 </template>
 
 <style scoped></style>
