@@ -13,7 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private User createUserFromJwt(Jwt jwt) {
+    public User createUserFromJwt(Jwt jwt) {
         User user = new User();
 
         user.setUserID(jwt.getSubject());
