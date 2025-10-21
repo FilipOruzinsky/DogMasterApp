@@ -1,0 +1,9 @@
+
+${AnsiColor.BRIGHT_GREEN}888888ba                       8888ba.88ba                      dP                         .d888888${AnsiColor.DEFAULT}                       ${AnsiColor.BRIGHT_BLUE}:: Application :: ${AnsiColor.DEFAULT}${spring.application.name}
+${AnsiColor.BRIGHT_GREEN}88    `8b                      88  `8b  `8b                     88                        d8'    88${AnsiColor.DEFAULT}                       ${AnsiColor.BRIGHT_BLUE}:: Active Profile :: ${AnsiColor.DEFAULT}${spring.profiles.active}
+${AnsiColor.BRIGHT_GREEN}88     88 .d8888b. .d8888b.    88   88   88 .d8888b. .d8888b. d8888P .d8888b. 88d888b.    88aaaaa88a 88d888b. 88d888b.${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_BLUE}:: Port :: ${AnsiColor.DEFAULT}${server.port}
+${AnsiColor.BRIGHT_GREEN}88     88 88'  `88 88'  `88    88   88   88 88'  `88 Y8ooooo.   88   88ooood8 88'  `88    88     88  88'  `88 88'  `88${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_BLUE}${AnsiStyle.UNDERLINE}:: Realm ::${AnsiStyle.NORMAL} ${AnsiColor.DEFAULT}${AnsiStyle.UNDERLINE}${dog.master.realm}${AnsiStyle.NORMAL}
+${AnsiColor.BRIGHT_GREEN}88    .8P 88.  .88 88.  .88    88   88   88 88.  .88       88   88   88.  ... 88          88     88  88.  .88 88.  .88${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_BLUE}:: PID :: ${AnsiColor.DEFAULT}${PID}
+${AnsiColor.BRIGHT_GREEN}8888888P  `88888P' `8888P88    dP   dP   dP `88888P8 `88888P'   dP   `88888P' dP          88     88  88Y888P' 88Y888P'${AnsiColor.DEFAULT}    ${AnsiColor.BRIGHT_BLUE}:: Java :: ${AnsiColor.DEFAULT}${java.version}
+${AnsiColor.BRIGHT_GREEN}                        .88                                                                          88       88${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_GREEN}                    d8888P                                                                           dP       dP${AnsiColor.DEFAULT}
