@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -41,8 +43,11 @@ public class TrainingService {
 
     }
 
-    public List<Training> getAlltrainingInThisMonthFromToday(LocalDateTime today) {
- //TODO add logic
-        return null;
+    public List<Training> getAllTrainingInThisMonthFromToday(LocalDateTime today) {
+       List<Training> allTrainings = trainingRepository.findAll();
+        Stream<Training> trainingStream = allTrainings.stream().filter((training) -> today.getYear() == training.getTrainingDateTime().getYear() && today.getMonth() == training.getTrainingDateTime().getMonth() && today.getDayOfMonth() == training.getTrainingDateTime().getDayOfMonth());
+        return trainingStream.toList();
     }
+
+
 }

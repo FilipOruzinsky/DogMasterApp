@@ -21,7 +21,7 @@ public class TrainingController {
     }
     @GetMapping("/in-current-month")
     public ResponseEntity<List<Training>> getAllTrainingsInCurrentMonth(@RequestParam(name = "month") LocalDateTime month) {
-        return ResponseEntity.ok(trainingService.getAllTrainingsInCurrentMonth(month));
+        return ResponseEntity.ok(trainingService.getAllTrainingInThisMonthFromToday(month));
     }
 
 

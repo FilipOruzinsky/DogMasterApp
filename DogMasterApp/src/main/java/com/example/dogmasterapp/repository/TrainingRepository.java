@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface TrainingRepository extends JpaRepository<Training, Integer> {
 
-    List<Training> getAllTrainingsInCurrentMonth(@RequestParam(name = "month") Integer month);
+//    List<Training> getAllTrainingsInCurrentMonth(@RequestParam(name = "month") Integer month);
+
 
 
 }
