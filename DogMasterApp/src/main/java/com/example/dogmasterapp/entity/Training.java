@@ -20,19 +20,22 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer trainingID;
 
+    @Column(name = "training_name")
     public String trainingName; // obrana , poslusnost...
+    @Column(name = "training_type")
     @Enumerated(EnumType.STRING)
     public TrainingType trainingType;
+    @Column(name = "training_date_time")
     public LocalDateTime trainingDateTime;
+    @Column(name = "count_of_training_participants")
     public Integer countOfTrainingParticipants =0;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-
-//    @JoinTable(
-//            name = "training_participants",
-//            joinColumns = @JoinColumn(name = "trainingID"),
-//            inverseJoinColumns = @JoinColumn(name = "userID")
-//    )
+    @ManyToMany(cascade = CascadeType.ALL) // todo: maybe check recommended way?
+    @JoinTable(
+            name = "training_participants",
+            joinColumns = @JoinColumn(name = "trainingid"),
+            inverseJoinColumns = @JoinColumn(name = "userid")
+    )
     public List<User> participants = new ArrayList<>();
 
 }

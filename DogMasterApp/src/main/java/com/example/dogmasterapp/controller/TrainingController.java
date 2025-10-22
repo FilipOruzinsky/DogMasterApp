@@ -20,8 +20,9 @@ public class TrainingController {
         return ResponseEntity.ok(trainingService.getAllTrainings());
     }
     @GetMapping("/in-current-month")
-    public ResponseEntity<List<Training>> getAllTrainingsInCurrentMonth(@RequestParam(name = "month") LocalDateTime month) {
-        return ResponseEntity.ok(trainingService.getAllTrainingInThisMonthFromToday(month));
+    public ResponseEntity<List<Training>> getAllTrainingsInCurrentMonth(@RequestParam(name = "month") String month) {
+        LocalDateTime currentMonth = LocalDateTime.parse(month);
+        return ResponseEntity.ok(trainingService.getAllTrainingInThisMonthFromToday(currentMonth));
     }
 
 

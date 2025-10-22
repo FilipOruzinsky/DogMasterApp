@@ -3,12 +3,10 @@ package com.example.dogmasterapp.service;
 import com.example.dogmasterapp.entity.Training;
 import com.example.dogmasterapp.entity.User;
 import com.example.dogmasterapp.repository.TrainingRepository;
-import com.example.dogmasterapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -45,7 +43,7 @@ public class TrainingService {
 
     public List<Training> getAllTrainingInThisMonthFromToday(LocalDateTime today) {
        List<Training> allTrainings = trainingRepository.findAll();
-        Stream<Training> trainingStream = allTrainings.stream().filter((training) -> today.getYear() == training.getTrainingDateTime().getYear() && today.getMonth() == training.getTrainingDateTime().getMonth() && today.getDayOfMonth() == training.getTrainingDateTime().getDayOfMonth());
+        Stream<Training> trainingStream = allTrainings.stream().filter((training) -> today.getYear() == training.getTrainingDateTime().getYear() && today.getMonth() == training.getTrainingDateTime().getMonth() && training.getTrainingDateTime().getDayOfMonth() >= today.getDayOfMonth() );
         return trainingStream.toList();
     }
 
