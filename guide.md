@@ -7,11 +7,3 @@
 - [ ] Task 4: Pri getAllTrainings user vidi vsetky treningy cas datum Psovoda a psa 
 
 
-
-
-
-> **Note:** This is an important note!
-
-> **Warning:** Proceed with caution.
-
-> **Tip:** You can use `--help` for more options.
