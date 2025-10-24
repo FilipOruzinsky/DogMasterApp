@@ -15,10 +15,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -90,5 +87,4 @@ public class SecurityConfig {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
     }
-
 }
