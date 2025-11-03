@@ -20,7 +20,7 @@
                                 <label for="password" class="${properties.kcLabelClass!}">${msg("password")}</label> *
                             </div>
                             <div class="${properties.kcInputWrapperClass!}">
-                                <div class="${properties.kcInputGroup!} test" dir="ltr">
+                                <div class="${properties.kcInputGroup!}" dir="ltr">
                                     <input type="password" id="password" class="${properties.kcInputClass!}" name="password"
                                            autocomplete="new-password"
                                            aria-invalid="<#if messagesPerField.existsError('password','password-confirm')>true</#if>"

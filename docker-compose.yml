@@ -1,0 +1,33 @@
+services:
+  # noinspection SpellCheckingInspection
+  postgis:
+    container_name: dog-master-postgis
+    image: postgis/postgis:18-3.6
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5436:5432'
+    networks:
+      - microservices-network
+
+  keycloak:
+    container_name: dog-master-keycloak
+    image: quay.io/keycloak/keycloak:26.4.2
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: temp-admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: temp-admin
+    ports:
+      - '9099:8080'
+    networks:
+      - microservices-network
+    volumes:
+      - ./keycloak/themes/dog-master:/opt/keycloak/themes/dog-master
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    command:
+      - start-dev
+      - --import-realm
+
+networks:
+  microservices-network:
+    driver: bridge
