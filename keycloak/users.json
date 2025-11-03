@@ -1,0 +1,18 @@
+[
+  {
+    "username": "test.user",
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "test.user@dogmaster.mail",
+    "enabled": true,
+    "credentials": [
+      {
+        "type": "password",
+        "value": "Start123",
+        "temporary": false
+      }
+    ],
+    "phoneNumber": "0123456789",
+    "address": "Some Address"
+  }
+]

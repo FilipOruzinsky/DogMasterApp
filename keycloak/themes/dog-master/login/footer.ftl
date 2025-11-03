@@ -1,7 +1,7 @@
 <#macro content>
     <footer class="kc-footer">
         <div class="kc-footer-inner">
-            <p class="kc-footer-quote">"Dog Master - where all dog trainers meet."</p>
+            <p class="kc-footer-quote">"Dog Master — where all dog trainers meet."</p>
             <p class="kc-footer-links">
                 <a href="#" target="_blank">Dog School</a> ·
                 <a href="#" target="_blank">Dog Portal</a> ·
