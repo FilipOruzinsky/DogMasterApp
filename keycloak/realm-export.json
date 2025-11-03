@@ -1250,6 +1250,23 @@
       },
       "protocolMappers": [
         {
+          "id": "25e455dd-b520-4f1d-a703-9994d01d8780",
+          "name": "phoneNumber",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "user.attribute": "phoneNumber",
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "phoneNumber",
+            "jsonType.label": "String"
+          }
+        },
+        {
           "id": "b1092026-e355-4ed9-a4b8-c763f1a149bf",
           "name": "sub",
           "protocol": "openid-connect",
@@ -1273,6 +1290,23 @@
             "access.token.claim": "true",
             "claim.name": "auth_time",
             "jsonType.label": "long"
+          }
+        },
+        {
+          "id": "a6604a21-5862-4970-9eee-12ac6b3e81a5",
+          "name": "address",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "user.attribute": "address",
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "address",
+            "jsonType.label": "String"
           }
         }
       ]
