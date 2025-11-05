@@ -12,7 +12,9 @@
         "temporary": false
       }
     ],
-    "phoneNumber": "0123456789",
-    "address": "Some Address"
+    "attributes": {
+      "phoneNumber": ["0123456789"],
+      "address": ["Some Address"]
+    }
   }
 ]
