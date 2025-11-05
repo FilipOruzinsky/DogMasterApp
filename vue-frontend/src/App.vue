@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import keycloak from "@/keycloak.ts";
+import keycloak from '@/keycloak.ts'
 
 const logout = () => {
-    keycloak.logout({ redirectUri: window.location.origin });
+    keycloak.logout({ redirectUri: window.location.origin })
 }
 </script>
 
