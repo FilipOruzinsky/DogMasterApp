@@ -1,9 +1,9 @@
 import Keycloak from 'keycloak-js'
 
 const keycloak = new Keycloak({
-    url: 'http://localhost:8080/',
-    realm: 'dog-master-realm', // Change this to your realm name
-    clientId: 'dog-master-client', // Change this to your client ID
+    url: 'http://localhost:8180/',
+    realm: 'DogMasterApp-realm', // Change this to your realm name
+    clientId: 'DogMasterApp-client', // Change this to your client ID
 })
 
 export const initKeycloak = async () => {
