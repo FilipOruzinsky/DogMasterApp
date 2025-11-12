@@ -1,0 +1,21 @@
+[
+    {
+        "username": "admin",
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "enabled": true,
+        "credentials": [
+            {
+                "type": "password",
+                "value": "admin",
+                "temporary": false
+            }
+        ],
+        "attributes": {
+        },
+        "realmRoles": [
+            "admin"
+        ]
+    }
+]

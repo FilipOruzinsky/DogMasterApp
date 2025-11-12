@@ -1,7 +1,8 @@
+name: dog-master-app
 services:
   # noinspection SpellCheckingInspection
   postgis:
-    container_name: dog-master-postgis
+    container_name: dog-master-app-postgis
     image: postgis/postgis:18-3.6
     environment:
       POSTGRES_USER: postgres
@@ -12,7 +13,7 @@ services:
       - microservices-network
 
   keycloak:
-    container_name: dog-master-keycloak
+    container_name: dog-master-app-keycloak
     image: quay.io/keycloak/keycloak:26.4.2
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: temp-admin
