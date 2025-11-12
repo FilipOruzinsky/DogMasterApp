@@ -1,20 +1,42 @@
 [
-  {
-    "username": "test.user",
-    "firstName": "Test",
-    "lastName": "User",
-    "email": "test.user@dogmaster.mail",
-    "enabled": true,
-    "credentials": [
-      {
-        "type": "password",
-        "value": "Start123",
-        "temporary": false
-      }
-    ],
-    "attributes": {
-      "phoneNumber": ["0123456789"],
-      "address": ["Some Address"]
+    {
+        "username": "test.user",
+        "firstName": "Test",
+        "lastName": "User",
+        "email": "test.user@dogmaster.mail",
+        "enabled": true,
+        "credentials": [
+            {
+                "type": "password",
+                "value": "App123",
+                "temporary": false
+            }
+        ],
+        "attributes": {
+            "phoneNumber": "0123456789",
+            "address": "Some Address"
+        },
+        "realmRoles": [
+            "USER"
+        ]
+    },
+    {
+        "username": "test.nobody",
+        "firstName": "Test",
+        "lastName": "Nobody",
+        "email": "test.nobody@nowhere.mail",
+        "enabled": true,
+        "credentials": [
+            {
+                "type": "password",
+                "value": "App123",
+                "temporary": false
+            }
+        ],
+        "attributes": {
+            "phoneNumber": "0987456789",
+            "address": "Somewhere Else"
+        },
+        "realmRoles": []
     }
-  }
 ]
