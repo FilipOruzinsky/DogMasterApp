@@ -10,9 +10,9 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 
 @Component
@@ -27,9 +27,13 @@ public class CustomAuthEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
         ApiException apiException = new ApiException(
-                "User is unauthorized",
-                HttpStatus.UNAUTHORIZED,
-                ZonedDateTime.now().format(FORMATTER)
+                "User is unauthorized",                    // message
+                Arrays.asList("UNKNOWN"),                  // roles
+                HttpStatus.UNAUTHORIZED,                   // httpStatus
+                ZonedDateTime.now().format(FORMATTER),     // timestamp
+                null,                                      // details
+                "AUTHENTICATED",                           // requiredPermission
+                request.getMethod() + " " + request.getRequestURI()  // endpoint
         );
 
         ObjectMapper mapper = new ObjectMapper();
