@@ -12,17 +12,27 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
     ElPopover: typeof import('element-plus/es')['ElPopover']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TrainingsAndLogout: typeof import('./src/components/TrainingsAndLogout.vue')['default']
+    UserProfile: typeof import('./src/components/UserProfile.vue')['default']
   }
 }
 
 // For TSX support
 declare global {
+  const CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
+  const ElAvatar: typeof import('element-plus/es')['ElAvatar']
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElIcon: typeof import('element-plus/es')['ElIcon']
   const ElPopover: typeof import('element-plus/es')['ElPopover']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
+  const TrainingsAndLogout: typeof import('./src/components/TrainingsAndLogout.vue')['default']
+  const UserProfile: typeof import('./src/components/UserProfile.vue')['default']
 }

@@ -32,9 +32,10 @@ html, body {
 body {
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
     color: var(--ink);
-    background: radial-gradient(1200px 600px at 10% -10%, rgba(46, 91, 255, .15), transparent 60%),
-    radial-gradient(1000px 500px at 110% 10%, rgba(0, 200, 180, .12), transparent 60%),
-    var(--bg);
+    /*background: radial-gradient(1200px 600px at 10% -10%, rgba(46, 91, 255, .15), transparent 60%),*/
+    /*radial-gradient(1000px 500px at 110% 10%, rgba(0, 200, 180, .12), transparent 60%),*/
+    /*var(--bg);*/
+    background-image: url("chains.png");
 }
 
 #kc-header {
@@ -64,24 +65,32 @@ body {
     margin: 0;
 }
 
-#kc-content, #kc-form, #kc-form-wrapper {
+#kc-content {
     width: 100%;
 }
 
 #kc-content {
+    background-color: aqua !important;
     display: flex;
     justify-content: center;
     padding: 48px 16px;
 }
 
+#kc-form{
+    background-color: #ef4444 !important;
+    width: 800px; /* moze tu byt px */
+}
+
 #kc-form-wrapper {
-    max-width: 420px;
+    background-color: blueviolet !important;
+    max-width: 550px; /* tu moze byt px */
     background: var(--card);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 28px;
     backdrop-filter: saturate(120%) blur(6px);
     border: 1px solid rgba(148, 163, 184, .18);
+    margin: 0 auto;
 }
 
 #kc-page-title, .kc-logo-wrap, .kc-title, h1, h2 {
