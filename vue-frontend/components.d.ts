@@ -13,6 +13,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
+    EditProfile: typeof import('./src/components/EditProfile.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElIcon: typeof import('element-plus/es')['ElIcon']
@@ -27,6 +28,8 @@ declare module 'vue' {
 // For TSX support
 declare global {
   const CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
+  const EditProfile: typeof import('./src/components/EditProfile.vue')['default']
+  const EditProfileView: typeof import('./src/components/EditProfileView.vue')['default']
   const ElAvatar: typeof import('element-plus/es')['ElAvatar']
   const ElButton: typeof import('element-plus/es')['ElButton']
   const ElIcon: typeof import('element-plus/es')['ElIcon']

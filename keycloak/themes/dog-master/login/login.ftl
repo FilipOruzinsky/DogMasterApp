@@ -85,8 +85,8 @@
     <#elseif section = "info" >
         <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
             <div id="kc-registration-container">
-                <div id="kc-registration">
-                    <span>${msg("noAccount")} <a tabindex="8"
+                <div id="kc-registration" style="color: yellow">
+                    <span>${msg("noAccount")} <a style="color: black" tabindex="8"
                                                  href="${url.registrationUrl}">${msg("doRegister")}</a></span>
                 </div>
             </div>

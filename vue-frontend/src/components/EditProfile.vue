@@ -1,19 +1,18 @@
 <script setup lang="ts">
+import CalendarAndReturnButton from '@/components/CalendarAndReturnButton.vue'
 import { Tools } from '@element-plus/icons-vue'
 
 const props = defineProps<{ obrazok: string }>()
 </script>
 
 <template>
-    <div class="profile">
-        <div class="handler">Handler: John Doe</div>
+    <CalendarAndReturnButton />
+    <div>
         <el-icon size="50px" color="red">
             <Tools />
         </el-icon>
-
-        <el-avatar :size="170" :src="props.obrazok" />
-        <slot />
     </div>
+    <div><el-avatar :size="170" :src="props.obrazok" /></div>
 </template>
 
 <style scoped></style>

@@ -46,6 +46,12 @@
     width: 5rem;
 }
 
+.calendarAndReturn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 @media(max-width: 600px){
     .action-buttons{
         flex-direction: column;
