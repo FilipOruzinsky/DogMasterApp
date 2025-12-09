@@ -1,13 +1,28 @@
 <script setup lang="ts">
 import { Tools } from '@element-plus/icons-vue'
 
+import { useRouter } from 'vue-router'
+
 const props = defineProps<{ obrazok: string }>()
+
+const router = useRouter()
+
+const handleToolsClick = () => {
+    router.push('edit-profile')
+}
+
+
 </script>
 
 <template>
     <div class="profile">
         <div class="handler">Handler: John Doe</div>
-        <el-icon size="50px" color="red">
+
+        <el-icon
+            size="50px"
+            color="red"
+            @click="handleToolsClick"
+            style="cursor: pointer;">
             <Tools />
         </el-icon>
 

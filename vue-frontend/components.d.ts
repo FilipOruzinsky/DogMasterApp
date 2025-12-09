@@ -13,10 +13,13 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
-    EditProfile: typeof import('./src/components/EditProfile.vue')['default']
+    EditProfileView: typeof import('./src/views/EditProfileView.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElPopover: typeof import('element-plus/es')['ElPopover']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -28,11 +31,13 @@ declare module 'vue' {
 // For TSX support
 declare global {
   const CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
-  const EditProfile: typeof import('./src/components/EditProfile.vue')['default']
-  const EditProfileView: typeof import('./src/components/EditProfileView.vue')['default']
+  const EditProfileView: typeof import('./src/views/EditProfileView.vue')['default']
   const ElAvatar: typeof import('element-plus/es')['ElAvatar']
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElForm: typeof import('element-plus/es')['ElForm']
+  const ElFormItem: typeof import('element-plus/es')['ElFormItem']
   const ElIcon: typeof import('element-plus/es')['ElIcon']
+  const ElInput: typeof import('element-plus/es')['ElInput']
   const ElPopover: typeof import('element-plus/es')['ElPopover']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']

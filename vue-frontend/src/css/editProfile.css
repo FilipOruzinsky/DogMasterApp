@@ -1,0 +1,13 @@
+.avatarandform{
+    width: 70%;
+    /*background-color: yellowgreen;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+.avatar{
+    margin-top: 15px; /* nechame tak ? */
+}
+
+
