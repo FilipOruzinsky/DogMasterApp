@@ -16,9 +16,6 @@ const formData = reactive({
     Email: '',
     Password: '',
 })
-
-
-
 </script>
 
 <template>
@@ -29,36 +26,41 @@ const formData = reactive({
         </el-icon>
         <div class="avatarandform">
             <div class="avatar"><el-avatar :size="270" :src="props.obrazok" /></div>
-            <el-form :model="formData" label-position="left" label-width="auto">
-                <el-form-item label="Name">
-                    <el-input v-model="formData.FirstName" />
-                </el-form-item>
+            <div>
+                <el-form :model="formData" label-position="left" label-width="auto">
+                    <el-form-item label="Name">
+                        <el-input v-model="formData.FirstName" />
+                    </el-form-item>
 
-                <el-form-item label="Last name">
-                    <el-input v-model="formData.LastName" />
-                </el-form-item>
+                    <el-form-item label="Last name">
+                        <el-input v-model="formData.LastName" />
+                    </el-form-item>
 
-                <el-form-item label="Address">
-                    <el-input v-model="formData.Address" />
-                </el-form-item>
+                    <el-form-item label="Address">
+                        <el-input v-model="formData.Address" />
+                    </el-form-item>
 
-                <el-form-item label="Phone number">
-                    <el-input v-model="formData.PhoneNumber" />
-                </el-form-item>
+                    <el-form-item label="Phone number">
+                        <el-input v-model="formData.PhoneNumber" />
+                    </el-form-item>
 
-                <el-form-item label="Email">
-                    <el-input v-model="formData.Email" />
-                </el-form-item>
+                    <el-form-item label="Email">
+                        <el-input v-model="formData.Email" />
+                    </el-form-item>
 
-                <el-form-item label="Password">
-                    <el-input v-model="formData.Password" />
-                </el-form-item>
-            </el-form>
+                    <el-form-item label="Password">
+                        <el-input v-model="formData.Password" />
+                    </el-form-item>
+                </el-form>
+
+                <el-button class="submit-button"
+
+                    type="primary"
+                >
+                    Submit<el-icon class="el-icon--right"><Check /></el-icon>
+                </el-button>
+            </div>
         </div>
-
-        <el-button style="max-width: fit-content; display: block; margin: 0 auto; background-color: chartreuse !important;" type="primary">
-            Submit<el-icon class="el-icon--right"><Check /></el-icon>
-        </el-button>
 
         <TrainingsAndLogout />
     </div>

@@ -10,4 +10,14 @@
     margin-top: 15px; /* nechame tak ? */
 }
 
+.submit-button{
+    max-width: fit-content;
+    display: block;
+    margin: 0 auto;
+    background-color: chartreuse !important;
+    float: right;
+}
 
+label{
+    color: white !important;
+}
