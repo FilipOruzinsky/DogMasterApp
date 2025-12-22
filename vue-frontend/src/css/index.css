@@ -1,0 +1,22 @@
+@import "homeView.css";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+}
+html,body{
+    height:100%;
+}
+#app{
+    background-image: url("../images/retaz.png");
+    height: 100%;
+}
+button{
+    background-color: red !important;
+    border: none !important;
+    color: black !important;
+}
+

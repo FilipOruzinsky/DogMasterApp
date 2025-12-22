@@ -1,0 +1,23 @@
+.avatarandform{
+    width: 70%;
+    /*background-color: yellowgreen;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+.avatar{
+    margin-top: 15px; /* nechame tak ? */
+}
+
+.submit-button{
+    max-width: fit-content;
+    display: block;
+    margin: 0 auto;
+    background-color: chartreuse !important;
+    float: right;
+}
+
+label{
+    color: white !important;
+}
