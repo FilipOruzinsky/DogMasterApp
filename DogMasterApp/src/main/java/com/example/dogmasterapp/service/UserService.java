@@ -1,5 +1,6 @@
 package com.example.dogmasterapp.service;
 
+import com.example.dogmasterapp.dto.UserDTO;
 import com.example.dogmasterapp.entity.User;
 import com.example.dogmasterapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,18 @@ public class UserService {
 
         return userRepository.findById(jwt.getSubject())
                 .orElseGet(() -> createUserFromJwt(jwt));
+    }
+
+    public User updateCurrentUser(UserDTO userDTO) {
+        User currentUser = getCurrentUser();
+        currentUser.firstName = userDTO.firstName();
+        currentUser.lastName = userDTO.lastName();
+        currentUser.address = userDTO.address();
+        currentUser.phoneNumber = userDTO.phoneNumber();
+        currentUser.email = userDTO.email();
+
+        return userRepository.save(currentUser);
+
+
     }
 }
