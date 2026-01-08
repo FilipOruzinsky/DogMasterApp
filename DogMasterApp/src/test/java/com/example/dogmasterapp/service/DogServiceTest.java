@@ -1,5 +1,6 @@
 package com.example.dogmasterapp.service;
 
+import com.example.dogmasterapp.dto.DogDTO;
 import com.example.dogmasterapp.entity.Dog;
 import com.example.dogmasterapp.entity.User;
 import com.example.dogmasterapp.exception.DogNotFoundException;
@@ -34,12 +35,13 @@ class DogServiceTest {
     @InjectMocks
     DogService dogService;
 
-    private Dog dog(String name, int age, String breed, User owner) {
+    private Dog dog(String name, int age, String breed, User owner,String sex) {
         Dog d = new Dog();
         d.setName(name);
         d.setAge(age);
         d.setBreed(breed);
         d.setOwner(owner);
+        d.setSex(sex);
         return d;
     }
 
@@ -53,8 +55,8 @@ class DogServiceTest {
     @DisplayName("createDog: nastaví ownera z current usera a uloží psa")
     void createDog_setsOwnerAndSaves() {
         User current = user("u-123");
-        Dog input = dog("Rex", 3, "beagle", null);
-        Dog saved = dog("Rex", 3, "beagle", current);
+        DogDTO input = new DogDTO("GSP", "Rex", "male", 2);
+        Dog saved = dog("Rex", 2, "GSP", current, "male");
 
         when(userService.getCurrentUser()).thenReturn(current);
         when(dogRepository.save(any(Dog.class))).thenReturn(saved);

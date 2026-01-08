@@ -4,6 +4,7 @@ CREATE TABLE dogs
     ownerid VARCHAR(255),
     name    VARCHAR(255),
     breed   VARCHAR(255),
+    sex     VARCHAR(6),
     age     INTEGER                                  NOT NULL,
     CONSTRAINT pk_dogs PRIMARY KEY (dogid)
 );

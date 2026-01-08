@@ -21,5 +21,6 @@ public class Dog {
     public User owner;
     public String name;
     public String breed;
+    public String sex;
     public int age;
 }

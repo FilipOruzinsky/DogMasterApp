@@ -1,5 +1,6 @@
 package com.example.dogmasterapp.controller;
 
+import com.example.dogmasterapp.dto.DogDTO;
 import com.example.dogmasterapp.entity.Dog;
 import com.example.dogmasterapp.service.DogService;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,13 @@ import java.util.List;
 public class DogController {
     private final DogService dogService;
 
+//    @PostMapping
+//    public ResponseEntity<Dog> createDog(@RequestBody Dog dog) {
+//        return ResponseEntity.ok(dogService.createDog(dog));
+//    }
+
     @PostMapping
-    public ResponseEntity<Dog> createDog(@RequestBody Dog dog) {
-        return ResponseEntity.ok(dogService.createDog(dog));
-    }
+    public ResponseEntity<Dog> createDogDTO(@RequestBody DogDTO dogDTO){return ResponseEntity.ok(dogService.createDog(dogDTO));}
 
     @GetMapping("/{id}")
     public ResponseEntity<Dog> getDogById(@PathVariable Integer id) {

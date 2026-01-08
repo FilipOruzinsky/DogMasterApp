@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import EditProfileView from '@/views/EditProfileView.vue'
+import EditDogView from '@/views/EditDogView.vue'
 
 
 const router = createRouter({
@@ -16,7 +17,15 @@ const router = createRouter({
             name: 'edit-profile',
             component: EditProfileView,
             props:{
-                obrazok: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+                obrazok: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+            },
+        },
+        {
+            path:'/edit-dog',
+            name:'edit-dog',
+            component:EditDogView,
+            props:{
+                obrazok: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
             },
         },
     ],

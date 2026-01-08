@@ -6,7 +6,7 @@ const date = new Date()
 
 const router = useRouter()
 
-const handleToolsClick = () => {
+const handleBackClick = () => {
     router.push('/')
 }
 </script>
@@ -15,7 +15,7 @@ const handleToolsClick = () => {
     <div class="calendarAndReturn">
         <div class="current-day">{{date.getDate()}}. {{date.getMonth()}}. {{date.getFullYear()}}</div>
         <el-button type="primary">
-            <el-icon @click="handleToolsClick"><Back /></el-icon>
+            <el-icon @click="handleBackClick"><Back /></el-icon>
         </el-button>
     </div>
 </template>

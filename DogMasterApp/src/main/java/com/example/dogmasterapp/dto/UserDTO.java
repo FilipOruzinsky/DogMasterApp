@@ -1,7 +1,5 @@
 package com.example.dogmasterapp.dto;
 
-import lombok.Data;
-
 
 public record UserDTO(
 
@@ -11,4 +9,5 @@ public record UserDTO(
         String phoneNumber,
         String email
 
-){}
+) {
+}
