@@ -47,16 +47,16 @@ const submitForm = async () => {
                         <el-input v-model="formData.name" />
                     </el-form-item>
 
-                    <el-form-item label="Last name">
+                    <el-form-item label="Breed">
                         <el-input v-model="formData.breed" />
                     </el-form-item>
 
-                    <el-form-item label="Address">
+                    <el-form-item label="Sex">
                         <el-input v-model="formData.sex" />
                     </el-form-item>
 
-                    <el-form-item label="Phone number">
-                        <el-input v-model="formData.age" />
+                    <el-form-item label="Age">
+                        <el-input type="number" v-model="formData.age" />
                     </el-form-item>
                 </el-form>
 
