@@ -3,52 +3,51 @@ import CalendarAndReturnButton from '@/components/CalendarAndReturnButton.vue'
 import { Check, Tools } from '@element-plus/icons-vue'
 import TrainingsAndLogout from '@/components/TrainingsAndLogout.vue'
 import '@/css/homeView.css'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive } from 'vue'
 import '@/css/editProfile.css'
 import keycloak from '@/keycloak.ts'
 
 const props = defineProps<{ obrazok: string }>()
 
 const formData = reactive({
-    FirstName: '',
-    LastName: '',
-    Address: '',
-    PhoneNumber: '',
-    Email: '',
-    Password: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    phoneNumber: '',
+    email: '',
 })
 
-onMounted(async () => {
-    const response = await fetch('http://localhost:8081/api/v1/users/me', { // toto vrati HTML
+const submitForm = async () => {
+    await fetch('http://localhost:8081/api/v1/users/me', {
+        method: 'POST',
         headers: {
+            Authorization: `Bearer ${keycloak.token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            alert('User updated successfully')
+            console.log(data)
+        })
+}
 
+onMounted(async () => {
+    const response = await fetch('http://localhost:8081/api/v1/users/me', {
+        headers: {
             Authorization: `Bearer ${keycloak.token}`,
         },
     })
 
     const user = await response.json()
 
-
-    formData.FirstName = user.firstName
-    formData.LastName = user.lastName
-    formData.Address = user.address
-    formData.PhoneNumber = user.phoneNumber
-    formData.Email = user.email
+    formData.firstName = user.firstName
+    formData.lastName = user.lastName
+    formData.address = user.address
+    formData.phoneNumber = user.phoneNumber
+    formData.email = user.email
 })
-// onMounted(async () => {
-//     console.log('EDIT PROFILE onMounted START')
-//
-//     try {
-//         console.log('Before fetch')
-//         const response = await fetch('http://localhost:8081/api/v1/users/me')
-//         console.log('After fetch, status:', response.status)
-//
-//         const text = await response.text()
-//         console.log('Raw response text:', text)
-//     } catch (e) {
-//         console.log('FETCH FAILED', e)
-//     }
-// })
 </script>
 
 <template>
@@ -58,36 +57,37 @@ onMounted(async () => {
             <Tools />
         </el-icon>
         <div class="avatarandform">
-            <div class="avatar"><el-avatar :size="270" :src="props.obrazok" /></div>
+            <div class="avatar">
+                <el-avatar :size="270" :src="props.obrazok" />
+            </div>
             <div>
                 <el-form :model="formData" label-position="left" label-width="auto">
                     <el-form-item label="Name">
-                        <el-input v-model="formData.FirstName" />
+                        <el-input v-model="formData.firstName" />
                     </el-form-item>
 
                     <el-form-item label="Last name">
-                        <el-input v-model="formData.LastName" />
+                        <el-input v-model="formData.lastName" />
                     </el-form-item>
 
                     <el-form-item label="Address">
-                        <el-input v-model="formData.Address" />
+                        <el-input v-model="formData.address" />
                     </el-form-item>
 
                     <el-form-item label="Phone number">
-                        <el-input v-model="formData.PhoneNumber" />
+                        <el-input v-model="formData.phoneNumber" />
                     </el-form-item>
 
                     <el-form-item label="Email">
-                        <el-input v-model="formData.Email" />
-                    </el-form-item>
-
-                    <el-form-item label="Password">
-                        <el-input v-model="formData.Password" />
+                        <el-input v-model="formData.email" />
                     </el-form-item>
                 </el-form>
 
-                <el-button class="submit-button" type="primary">
-                    Submit<el-icon class="el-icon--right"><Check /></el-icon>
+                <el-button class="submit-button" type="primary" @click="submitForm">
+                    Submit
+                    <el-icon class="el-icon--right">
+                        <Check />
+                    </el-icon>
                 </el-button>
             </div>
         </div>

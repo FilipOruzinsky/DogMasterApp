@@ -11,8 +11,8 @@ import json
 import requests
 from typing import List, Dict, Any, Optional
 
-from keycloak.Credentials import Credentials
-from keycloak.User import User
+from Credentials import Credentials
+from User import User
 
 keycloak_base_url = "http://localhost:9099"
 

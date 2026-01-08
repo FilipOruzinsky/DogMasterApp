@@ -2,7 +2,7 @@ import json
 from dataclasses import dataclass, asdict
 from typing import List, Optional, Dict
 
-from keycloak.Credentials import Credentials
+from Credentials import Credentials
 
 
 @dataclass
