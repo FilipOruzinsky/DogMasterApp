@@ -6,6 +6,9 @@ import '@/css/homeView.css'
 import { onMounted, reactive } from 'vue'
 import '@/css/editProfile.css'
 import keycloak from '@/keycloak.ts'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 const props = defineProps<{ obrazok: string }>()
 
@@ -34,6 +37,7 @@ const submitForm = async () => {
 }
 
 onMounted(async () => {
+    await store.dispatch('getDogs')
     const response = await fetch('http://localhost:8081/api/v1/users/me', {
         headers: {
             Authorization: `Bearer ${keycloak.token}`,
@@ -52,6 +56,7 @@ onMounted(async () => {
 
 <template>
     <div class="container">
+        <p style="color: white">{{store.state.dogs}}</p>
         <CalendarAndReturnButton />
         <el-icon size="50px" color="red">
             <Tools />
