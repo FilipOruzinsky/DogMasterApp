@@ -2,6 +2,7 @@
 import { Tools } from '@element-plus/icons-vue'
 
 import { useRouter } from 'vue-router'
+import keycloak from "@/keycloak.ts";
 
 const props = defineProps<{ obrazok: string }>()
 
@@ -16,7 +17,7 @@ const handleToolsClick = () => {
 
 <template>
     <div class="profile">
-        <div class="handler">Handler: John Doe</div>
+        <div class="handler">Handler: {{keycloak.idTokenParsed?.given_name}}</div>
 
         <el-icon
             size="50px"

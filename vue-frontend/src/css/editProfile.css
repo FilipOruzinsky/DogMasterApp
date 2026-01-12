@@ -6,9 +6,7 @@
     justify-content: space-evenly;
 
 }
-.avatar{
-    margin-top: 15px; /* nechame tak ? */
-}
+
 
 .submit-button{
     max-width: fit-content;
@@ -20,4 +18,6 @@
 
 label{
     color: white !important;
+    font-size: large !important;
+    margin-right: 20px;
 }

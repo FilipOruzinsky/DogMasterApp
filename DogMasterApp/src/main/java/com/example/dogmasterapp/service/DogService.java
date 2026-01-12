@@ -1,5 +1,6 @@
 package com.example.dogmasterapp.service;
 
+import com.example.dogmasterapp.dto.DogDTO;
 import com.example.dogmasterapp.entity.Dog;
 import com.example.dogmasterapp.exception.DogNotFoundException;
 import com.example.dogmasterapp.repository.DogRepository;
@@ -19,8 +20,13 @@ public class DogService {
     private final UserService userService;
     private final Logger logger = LoggerFactory.getLogger(DogService.class);
 
-    public Dog createDog(Dog dog) {
+    public Dog createDog(DogDTO dogDto) {
+        Dog dog = new Dog();
         dog.setOwner(userService.getCurrentUser());
+        dog.setName(dogDto.name());
+        dog.setBreed(dogDto.breed());
+        dog.setSex(dogDto.sex());
+        dog.setAge(dogDto.age());
 
         return dogRepository.save(dog);
     }

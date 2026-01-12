@@ -1,24 +1,21 @@
 <script setup lang="ts">
+import TrainingsAndLogout from '@/components/TrainingsAndLogout.vue'
 import CalendarAndReturnButton from '@/components/CalendarAndReturnButton.vue'
 import { Check, Tools } from '@element-plus/icons-vue'
-import TrainingsAndLogout from '@/components/TrainingsAndLogout.vue'
-import '@/css/homeView.css'
-import { onMounted, reactive } from 'vue'
-import '@/css/editProfile.css'
+import { reactive } from 'vue'
 import keycloak from '@/keycloak.ts'
 
 const props = defineProps<{ obrazok: string }>()
 
 const formData = reactive({
-    firstName: '',
-    lastName: '',
-    address: '',
-    phoneNumber: '',
-    email: '',
+    name: '',
+    breed: '',
+    sex: '',
+    age: '',
 })
 
 const submitForm = async () => {
-    await fetch('http://localhost:8081/api/v1/users/me', {
+    await fetch('http://localhost:8081/api/v1/dogs', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${keycloak.token}`,
@@ -28,26 +25,10 @@ const submitForm = async () => {
     })
         .then((response) => response.json())
         .then((data) => {
-            alert('User updated successfully')
+            alert('Dog created successfully')
             console.log(data)
         })
 }
-
-onMounted(async () => {
-    const response = await fetch('http://localhost:8081/api/v1/users/me', {
-        headers: {
-            Authorization: `Bearer ${keycloak.token}`,
-        },
-    })
-
-    const user = await response.json()
-
-    formData.firstName = user.firstName
-    formData.lastName = user.lastName
-    formData.address = user.address
-    formData.phoneNumber = user.phoneNumber
-    formData.email = user.email
-})
 </script>
 
 <template>
@@ -63,23 +44,19 @@ onMounted(async () => {
             <div>
                 <el-form :model="formData" label-position="left" label-width="auto">
                     <el-form-item label="Name">
-                        <el-input v-model="formData.firstName" />
+                        <el-input v-model="formData.name" />
                     </el-form-item>
 
-                    <el-form-item label="Last name">
-                        <el-input v-model="formData.lastName" />
+                    <el-form-item label="Breed">
+                        <el-input v-model="formData.breed" />
                     </el-form-item>
 
-                    <el-form-item label="Address">
-                        <el-input v-model="formData.address" />
+                    <el-form-item label="Sex">
+                        <el-input v-model="formData.sex" />
                     </el-form-item>
 
-                    <el-form-item label="Phone number">
-                        <el-input v-model="formData.phoneNumber" />
-                    </el-form-item>
-
-                    <el-form-item label="Email">
-                        <el-input v-model="formData.email" />
+                    <el-form-item label="Age">
+                        <el-input type="number" v-model="formData.age" />
                     </el-form-item>
                 </el-form>
 

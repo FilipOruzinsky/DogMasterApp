@@ -1,5 +1,6 @@
 package com.example.dogmasterapp.controller;
 
+import com.example.dogmasterapp.dto.UserDTO;
 import com.example.dogmasterapp.entity.User;
 import com.example.dogmasterapp.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,11 @@ public class UserController {
     public User getCurrentUser() {
         return userService.getCurrentUser();
     }
+
+    @PostMapping("/me")
+    public User UpdateCurrentUser(@RequestBody UserDTO userDTO) {
+        return userService.updateCurrentUser(userDTO);
+    }
 }
+
 
