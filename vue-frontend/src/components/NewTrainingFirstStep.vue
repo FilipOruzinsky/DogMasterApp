@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import "@/css/trainingsButtons.css"
+import '@/css/trainingsButtons.css'
 
-const emit = defineEmits(['trainingSelect'])
-
-
+const emit = defineEmits<{
+    (e: 'training-select', trainingGroup: string): void
+}>()
 </script>
 
 <template>
-  <div>
-      <el-button class="trainings-buttons ">Individual</el-button>
-      <el-button class="trainings-buttons">Group</el-button>
-  </div>
-
+    <div>
+        <el-button class="trainings-buttons" @click="emit('training-select', 'individual')">Individual</el-button>
+        <el-button class="trainings-buttons" @click="emit('training-select', 'group')">Group</el-button>
+    </div>
 </template>
-
-<style scoped>
-
-</style>
