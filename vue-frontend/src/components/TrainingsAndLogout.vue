@@ -2,14 +2,19 @@
 import { List, Right } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import keycloak from '@/keycloak.ts'
+import { useRouter } from 'vue-router'
+import Logout from '@/components/Logout.vue';
 
 const doneTrainings = ref(5)
 const scheduledTrainings = ref(2)
 
-const logout = () => {
-    keycloak.logout({ redirectUri: window.location.origin })
-}
 
+
+const router = useRouter()
+
+const onClickTrainigs = () => {
+    router.push('/new-training')
+}
 
 </script>
 
@@ -20,18 +25,13 @@ const logout = () => {
             <div class="scheduled">Scheduled trainings {{ scheduledTrainings }}</div>
         </div>
         <div class="action-buttons">
-            <el-button type="primary">
+            <el-button type="primary" @click="onClickTrainigs">
                 Scheduled training
                 <el-icon class="el-icon--right">
                     <List />
                 </el-icon>
             </el-button>
-            <el-button @click="logout" type="primary">
-                Logout
-                <el-icon class="el-icon--right">
-                    <Right />
-                </el-icon>
-            </el-button>
+          <Logout />
         </div>
     </div>
 </template>
