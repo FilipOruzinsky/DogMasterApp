@@ -12,7 +12,7 @@ const props = defineProps<{ obrazok: string }>()
 const step = ref(1)
 const trainingGroup = ref('')
 const trainingTypes = ref<string[]>([])
-const calendarVisible = ref(false)
+const calendarVisible = ref(true)
 
 /**
  * Handles the selection of a training option by updating the training group and progressing to the next step.
@@ -39,7 +39,6 @@ const handleTrainingTypesSelect = (selectedTrainingTypesEmit: string[]) => {
 }
 
 
-
 </script>
 
 <template>
@@ -56,11 +55,14 @@ const handleTrainingTypesSelect = (selectedTrainingTypesEmit: string[]) => {
         </ProfileForTraining>
         <el-dialog
             v-model="calendarVisible"
-            title="Warning"
-            width="500"
+            title="Training Calendar"
+            width="90vw"
+            class="large-calendar-dialog"
+            append-to-body
             align-center
+            :show-close="false"
         >
-            <Calendar />
+            <Calendar :training-group="trainingGroup" />
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="calendarVisible = false">Cancel</el-button>
@@ -71,3 +73,18 @@ const handleTrainingTypesSelect = (selectedTrainingTypesEmit: string[]) => {
         <Logout />
     </div>
 </template>
+
+<style scoped>
+/* Use :deep because el-dialog is appended to body and might sit outside the scoped scope */
+:deep(.large-calendar-dialog) {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0; /* Override default margins to keep it centered */
+}
+
+:deep(.large-calendar-dialog .el-dialog__body) {
+    flex: 1;
+    overflow-y: auto;
+}
+</style>

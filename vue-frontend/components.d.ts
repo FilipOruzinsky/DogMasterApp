@@ -14,9 +14,11 @@ declare module 'vue' {
   export interface GlobalComponents {
     Calendar: typeof import('./src/components/Calendar.vue')['default']
     CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
+    ChildOne: typeof import('./src/components/ChildOne.vue')['default']
     EditProfileView: typeof import('./src/views/EditProfileView.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCalendar: typeof import('element-plus/es')['ElCalendar']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
@@ -41,9 +43,11 @@ declare module 'vue' {
 declare global {
   const Calendar: typeof import('./src/components/Calendar.vue')['default']
   const CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
+  const ChildOne: typeof import('./src/components/ChildOne.vue')['default']
   const EditProfileView: typeof import('./src/views/EditProfileView.vue')['default']
   const ElAvatar: typeof import('element-plus/es')['ElAvatar']
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
   const ElCalendar: typeof import('element-plus/es')['ElCalendar']
   const ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
   const ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
