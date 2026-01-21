@@ -51,7 +51,7 @@ public class UserService {
      * Updates and persists the current user with DTO
      */
     @Transactional
-    public User updateCurrentUser(UserDTO userDTO) {
+    public User updateCurrentUser(UserDTO userDTO) { //tu je na vstupe UserDto lebo FE posle UserDto ale do DB to chceme ulozit ako Usera tak premapujeme UserDto na User ??
         User currentUser = getCurrentUser();
         currentUser.firstName = userDTO.firstName();
         currentUser.lastName = userDTO.lastName();
