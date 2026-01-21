@@ -21,7 +21,14 @@ public class UserController {
     @PostMapping("/me")
     public User UpdateCurrentUser(@RequestBody UserDTO userDTO) {
         return userService.updateCurrentUser(userDTO);
-    }
+    }/*tu nieje lepsie mat ako parameter na returne  tiez UserDTO kedze na FE pri
+    update nemame heslo tym padom tam neni cela entita
+
+    ked vraciam teraz z BE updanutu entitu User videl by som v Devtools vserky
+    premene ? kedze je tu na vstupe User a nie UserDTO
+
+    mozno prerobit
+    */
 }
 
 

@@ -5,20 +5,22 @@ import NewTrainingFirstStep from '@/components/NewTrainingFirstStep.vue'
 import Logout from '@/components/Logout.vue'
 import { ref } from 'vue'
 import NewTrainingSecondStep from '@/components/NewTrainingSecondStep.vue'
+import Calendar from '@/components/Calendar.vue'
 
 const props = defineProps<{ obrazok: string }>()
 
 const step = ref(1)
 const trainingGroup = ref('')
 const trainingTypes = ref<string[]>([])
+const calendarVisible = ref(false)
 
 /**
  * Handles the selection of a training option by updating the training group and progressing to the next step.
  *
- * @param {string} v - The selected training option value.
+ * @param {string} trainingGroupEmit - The selected training option value.
  */
-const handleTrainingSelect = (v: string) => {
-    trainingGroup.value = v
+const handleTrainingSelect = (trainingGroupEmit: string) => {
+    trainingGroup.value = trainingGroupEmit
     step.value = 2
 }
 
@@ -29,11 +31,15 @@ const handleTrainingSelect = (v: string) => {
  * with the provided array of strings representing the selected
  * training types.
  *
- * @param {string[]} v - An array of strings representing the selected training types.
+ * @param {string[]} selectedTrainingTypesEmit - An array of strings representing the selected training types.
  */
-const handleTrainingTypesSelect = (v: string[]) => {
-    trainingTypes.value = v
+const handleTrainingTypesSelect = (selectedTrainingTypesEmit: string[]) => {
+    trainingTypes.value = selectedTrainingTypesEmit
+    calendarVisible.value = true
 }
+
+
+
 </script>
 
 <template>
@@ -48,6 +54,20 @@ const handleTrainingTypesSelect = (v: string[]) => {
                 @training-type-select="handleTrainingTypesSelect"
             />
         </ProfileForTraining>
+        <el-dialog
+            v-model="calendarVisible"
+            title="Warning"
+            width="500"
+            align-center
+        >
+            <Calendar />
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="calendarVisible = false">Cancel</el-button>
+                    <el-button type="primary" @click="calendarVisible = false">Confirm</el-button>
+                </div>
+            </template>
+        </el-dialog>
         <Logout />
     </div>
 </template>

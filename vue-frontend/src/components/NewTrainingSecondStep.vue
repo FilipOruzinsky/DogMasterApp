@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import {useRouter} from "vue-router";
 
 const selectedTrainingTypes = ref<string[]>([])
 const allChecked = ref(false)
@@ -7,6 +8,9 @@ const allChecked = ref(false)
 const emit = defineEmits<{
     (e: 'training-type-select', trainingTypes: string[]): void
 }>()
+
+
+
 
 /**
  * Toggles the state of the selected training types based on the `allChecked` flag.

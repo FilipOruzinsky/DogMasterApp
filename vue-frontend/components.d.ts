@@ -12,12 +12,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Calendar: typeof import('./src/components/Calendar.vue')['default']
     CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
     EditProfileView: typeof import('./src/views/EditProfileView.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCalendar: typeof import('element-plus/es')['ElCalendar']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
@@ -36,12 +39,15 @@ declare module 'vue' {
 
 // For TSX support
 declare global {
+  const Calendar: typeof import('./src/components/Calendar.vue')['default']
   const CalendarAndReturnButton: typeof import('./src/components/CalendarAndReturnButton.vue')['default']
   const EditProfileView: typeof import('./src/views/EditProfileView.vue')['default']
   const ElAvatar: typeof import('element-plus/es')['ElAvatar']
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElCalendar: typeof import('element-plus/es')['ElCalendar']
   const ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
   const ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
+  const ElDialog: typeof import('element-plus/es')['ElDialog']
   const ElForm: typeof import('element-plus/es')['ElForm']
   const ElFormItem: typeof import('element-plus/es')['ElFormItem']
   const ElIcon: typeof import('element-plus/es')['ElIcon']
