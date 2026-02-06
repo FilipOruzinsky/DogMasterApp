@@ -6,6 +6,7 @@ import Logout from '@/components/Logout.vue'
 import { ref } from 'vue'
 import NewTrainingSecondStep from '@/components/NewTrainingSecondStep.vue'
 import Calendar from '@/components/Calendar.vue'
+import axios from 'axios'
 
 const props = defineProps<{ obrazok: string }>()
 
@@ -38,7 +39,9 @@ const handleTrainingTypesSelect = (selectedTrainingTypesEmit: string[]) => {
     calendarVisible.value = true
 }
 
-
+axios.post('http://localhost:8081/api/v1/trainings', {
+    trainings: trainingTypes.value.join('-'),
+})
 </script>
 
 <template>

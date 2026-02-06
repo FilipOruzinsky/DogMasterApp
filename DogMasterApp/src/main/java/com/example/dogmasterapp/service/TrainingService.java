@@ -1,5 +1,6 @@
 package com.example.dogmasterapp.service;
 
+import com.example.dogmasterapp.dto.TrainingDTO;
 import com.example.dogmasterapp.entity.Training;
 import com.example.dogmasterapp.entity.User;
 import com.example.dogmasterapp.repository.TrainingRepository;
@@ -21,8 +22,11 @@ public class TrainingService {
     }
 
 
-    public Training createTraining(Training training) {
+    public Training createTraining(TrainingDTO trainingDTO) {
         User trainingUser = userService.getCurrentUser();
+        Training training = new Training();
+        training.trainingName = trainingDTO.trainings();
+
         training.participants.add(trainingUser);
         training.countOfTrainingParticipants++;
         return trainingRepository.save(training);
