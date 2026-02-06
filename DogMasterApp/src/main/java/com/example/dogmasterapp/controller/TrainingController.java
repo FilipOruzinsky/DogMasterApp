@@ -1,5 +1,6 @@
 package com.example.dogmasterapp.controller;
 
+import com.example.dogmasterapp.dto.TrainingDTO;
 import com.example.dogmasterapp.entity.Training;
 import com.example.dogmasterapp.service.TrainingService;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +28,19 @@ public class TrainingController {
 
 
 
+//    @PostMapping
+//    public ResponseEntity<Training> createTraining(@RequestBody Training training) {
+//        return ResponseEntity.ok(trainingService.createTraining(training));
+//    }
+
     @PostMapping
-    public ResponseEntity<Training> createTraining(@RequestBody Training training) {
-        return ResponseEntity.ok(trainingService.createTraining(training));
+    public ResponseEntity<Training> createTraining(@RequestBody TrainingDTO trainingDTO) {
+        return ResponseEntity.ok((trainingService.createTraining(trainingDTO)));
+
+
     }
+
+
     @PostMapping("/{trainingID}/add-participant")
     public ResponseEntity<Training> addParticipantToTraining(@PathVariable Integer trainingID) {
         return ResponseEntity.ok(trainingService.addParticipant(trainingID));
