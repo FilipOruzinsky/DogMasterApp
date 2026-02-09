@@ -25,7 +25,7 @@ public class TrainingService {
     public Training createTraining(TrainingDTO trainingDTO) {
         User trainingUser = userService.getCurrentUser();
         Training training = new Training();
-        training.trainingName = trainingDTO.trainings();
+        training.trainingName = trainingDTO.trainingsNames();
 
         training.participants.add(trainingUser);
         training.countOfTrainingParticipants++;
