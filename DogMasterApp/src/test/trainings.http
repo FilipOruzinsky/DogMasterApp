@@ -1,12 +1,28 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+@realm = dog-master-realm
+@username = harry.potter
+@password = Start123
 
 ###
+POST http://localhost:9099/realms/{{realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
 
+grant_type = password
+    &
+client_id = dog-master-client
+    &
+username = {{username}}
+    &
+password = {{password}}
+
+> {%
+    // noinspection JSUnresolvedReference
+    client.global.set("user_access_token", response.body.access_token);
+%}
+
+###
 POST http://localhost:8081/api/v1/trainings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpa1liMDV3U1NubVBCc190TVZFU2UtblRhc2ZlcmFFQjRDYXBQcmtJaVB3In0.eyJleHAiOjE3NzA0MDQ3OTgsImlhdCI6MTc3MDQwNDQ5OCwianRpIjoib25ydHJvOjQ4ZDUzMWZkLWI3MGItYWJkYS0wNTBmLTI5MWY5YWEzYzI2OCIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTA5OS9yZWFsbXMvZG9nLW1hc3Rlci1yZWFsbSIsInN1YiI6ImEwOTViYzY1LWFiYWMtNDA4Mi05NWUzLTkyMDljYzc4NjUwZSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImRvZy1tYXN0ZXItY2xpZW50Iiwic2lkIjoiY2Y3MGU4ODgtMjZiOC00NjM3LTI4MTItZjA1ODQ1NGQ0MzUxIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjUxNzMiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1kb2ctbWFzdGVyLXJlYWxtIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImFkZHJlc3MiOiJaYW1rb3ZhIDUiLCJwaG9uZU51bWJlciI6IjA5MTU5MDE4ODUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJKYW5vIE1ya3ZhIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiamFub21ya3ZhIiwiZ2l2ZW5fbmFtZSI6Ikphbm8iLCJmYW1pbHlfbmFtZSI6Ik1ya3ZhIiwiZW1haWwiOiJqYW5vQGdtYWlsLmNvbSJ9.vNAnJmrn4P81tnKhWsrS8pR0rq7CY9qiKI9ppl7hm2CtTGrcKC_x1vyxfOoGO1lM8KzUQCJc0k4xIZ7nFbSbH1t56J7tXa5VVpyiNoEPLaDeHEQqY4aQen2X4J48fkflYHn7iryiafcay2xgtCcWj8m3DL6rVq3ez_XDWhZYyxtiHFja1V9ATcSTvhuOfzm37hUYs0p08cQN9ZHDYOCba3C3TtA33RirVrDtDrSnVn9VZMyPCHohgaQxvm6ugpacWM9KxDHGqwJxR_neDvsG7fkokPpqXpBD0BjrTfsC9geRL-Bp2-sgnHa6TEapFbjBLKA3_3f9T6ym9VRkUAsJgQ
+Authorization: Bearer {{user_access_token}}
 
 {
   "trainingtype": "INDIVIDUAL",
