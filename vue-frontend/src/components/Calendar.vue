@@ -5,21 +5,25 @@ const props = defineProps<{
     trainingGroup: string
 }>()
 
+const emits = defineEmits<{
+    (e: 'date-selected', day: string): void
+}>()
+
 const value = ref(new Date())
 const currentUser = 'Me'
 
 // Structure matches your Training.java: name/type and list of participants
 interface TrainingDay {
-    trainingName: string;
-    participants: string[];
+    trainingName: string
+    participants: string[]
 }
 
 const scheduledTrainings = ref<Record<string, TrainingDay>>({
-    '2026-01-05': {
+    '2026-02-05': {
         trainingName: 'Obedience',
         participants: ['John Doe', 'Jane Smith'],
     },
-    '2026-01-17': {
+    '2026-02-17': {
         trainingName: 'Defense',
         participants: ['Alice Brown', 'Bob Wilson'],
     },
@@ -46,6 +50,9 @@ const handleJoinTraining = (day: string) => {
     } else {
         training.participants.unshift(currentUser)
     }
+
+    emits('date-selected', day)
+    // console.log(scheduledTrainings.value)
 }
 </script>
 

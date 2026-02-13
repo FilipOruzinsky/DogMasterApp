@@ -7,13 +7,15 @@ import { ref } from 'vue'
 import NewTrainingSecondStep from '@/components/NewTrainingSecondStep.vue'
 import Calendar from '@/components/Calendar.vue'
 import axios from 'axios'
+import keycloak from '@/keycloak.ts'
 
 const props = defineProps<{ obrazok: string }>()
 
 const step = ref(1)
 const trainingGroup = ref('')
 const trainingTypes = ref<string[]>([])
-const calendarVisible = ref(true)
+const calendarVisible = ref(false)
+const trainingDate = ref('')
 
 /**
  * Handles the selection of a training option by updating the training group and progressing to the next step.
@@ -39,9 +41,28 @@ const handleTrainingTypesSelect = (selectedTrainingTypesEmit: string[]) => {
     calendarVisible.value = true
 }
 
-axios.post('http://localhost:8081/api/v1/trainings', {
-    trainings: trainingTypes.value.join('-'),
-})
+const handleSubmit = async () => {
+    calendarVisible.value = false
+    console.log(trainingDate.value)
+    axios.post(
+        'http://localhost:8081/api/v1/trainings',
+        {
+            trainingsNames: trainingTypes.value.join(','),
+            trainingtype: trainingGroup.value.toUpperCase(),
+            trainingDate: trainingDate.value,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${keycloak.token}`,
+            },
+        },
+    )
+}
+
+const handleDateSelection = (date: string) => {
+    trainingDate.value = date
+    console.log(trainingDate.value)
+}
 </script>
 
 <template>
@@ -65,11 +86,11 @@ axios.post('http://localhost:8081/api/v1/trainings', {
             align-center
             :show-close="false"
         >
-            <Calendar :training-group="trainingGroup" />
+            <Calendar :training-group="trainingGroup" @date-selected="handleDateSelection" />
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="calendarVisible = false">Cancel</el-button>
-                    <el-button type="primary" @click="calendarVisible = false">Confirm</el-button>
+                    <el-button type="primary" @click="handleSubmit()">Confirm</el-button>
                 </div>
             </template>
         </el-dialog>
