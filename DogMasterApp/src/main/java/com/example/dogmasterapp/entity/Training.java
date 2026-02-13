@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +14,19 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "trainingsNames")
+@Table(name = "trainings")
 public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer trainingID;
 
     @Column(name = "training_name")
-    public String trainingName; // obrana , poslusnost...
+    public String trainingNames; // obrana , poslusnost...
     @Column(name = "training_type")
     @Enumerated(EnumType.STRING)
     public TrainingType trainingType;
-    @Column(name = "training_date_time")
-    public LocalDateTime trainingDateTime;
+    @Column(name = "training_date")
+    public LocalDate trainingDate;
     @Column(name = "count_of_training_participants")
     public Integer countOfTrainingParticipants =0;
 

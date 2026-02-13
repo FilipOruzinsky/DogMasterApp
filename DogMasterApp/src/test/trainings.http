@@ -1,6 +1,7 @@
 @realm = dog-master-realm
-@username = harry.potter
-@password = Start123
+@username = test.user
+@password = App123
+
 
 ###
 POST http://localhost:9099/realms/{{realm}}/protocol/openid-connect/token
@@ -27,5 +28,5 @@ Authorization: Bearer {{user_access_token}}
 {
   "trainingtype": "INDIVIDUAL",
   "trainingsNames": "protection,footage",
-  "date": "2026-02-08"
+  "trainingDate": "2026-02-08"
 }
