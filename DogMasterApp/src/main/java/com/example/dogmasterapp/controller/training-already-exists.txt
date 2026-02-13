@@ -1,0 +1,5 @@
+1. idem vytvoriť tréning
+2. ak už existuje tréning na daný deň, vyhodiť error
+3. nájdem v databáze, či existuje tréning s dátumom, ktorý posielam v requeste
+4. vytvorím na to metódu v repe, ktorá vráti boolean
+5. použijem ju v service
