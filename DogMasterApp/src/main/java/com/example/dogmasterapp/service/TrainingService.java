@@ -7,7 +7,6 @@ import com.example.dogmasterapp.repository.TrainingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
@@ -26,15 +25,17 @@ public class TrainingService {
     public Training createTraining(TrainingDTO trainingDTO) {
         User trainingUser = userService.getCurrentUser();
 
-        boolean exist =
-                trainingRepository.existsTrainingForUserOnDate(
-                       trainingUser.getUserID(),
-                        trainingDTO.trainingDate()
-                );
+//        boolean exist =
+//                trainingRepository.existsTrainingForUserOnDate(
+//                       trainingUser.getUserID(),
+//                        trainingDTO.trainingDate()
+//                );
 
-        if (exist) {
+        var trainingExistsOnDate = trainingRepository.existsTrainingByTrainingDate(trainingDTO.trainingDate());
+
+        if (trainingExistsOnDate) {
             throw new IllegalStateException(
-                    "User already has a training scheduled for this day"
+                    "Training for that date already exists! If you want to join, add yourself as participant."
             );
         }
         Training training = new Training();
