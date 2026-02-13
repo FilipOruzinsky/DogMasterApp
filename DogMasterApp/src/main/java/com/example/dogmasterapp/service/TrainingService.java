@@ -7,6 +7,7 @@ import com.example.dogmasterapp.repository.TrainingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
@@ -24,9 +25,22 @@ public class TrainingService {
 
     public Training createTraining(TrainingDTO trainingDTO) {
         User trainingUser = userService.getCurrentUser();
-        Training training = new Training();
-        training.trainingName = trainingDTO.trainingsNames();
 
+        boolean exist =
+                trainingRepository.existsTrainingForUserOnDate(
+                       trainingUser.getUserID(),
+                        trainingDTO.trainingDate()
+                );
+
+        if (exist) {
+            throw new IllegalStateException(
+                    "User already has a training scheduled for this day"
+            );
+        }
+        Training training = new Training();
+        training.trainingNames = trainingDTO.trainingsNames();
+        training.trainingDate = trainingDTO.trainingDate();
+        training.trainingType = trainingDTO.trainingtype();
         training.participants.add(trainingUser);
         training.countOfTrainingParticipants++;
         return trainingRepository.save(training);
@@ -47,7 +61,7 @@ public class TrainingService {
 
     public List<Training> getAllTrainingInThisMonthFromToday(LocalDateTime today) {
        List<Training> allTrainings = trainingRepository.findAll();
-        Stream<Training> trainingStream = allTrainings.stream().filter((training) -> today.getYear() == training.getTrainingDateTime().getYear() && today.getMonth() == training.getTrainingDateTime().getMonth() && training.getTrainingDateTime().getDayOfMonth() >= today.getDayOfMonth() );
+        Stream<Training> trainingStream = allTrainings.stream().filter((training) -> today.getYear() == training.getTrainingDate().getYear() && today.getMonth() == training.getTrainingDate().getMonth() && training.getTrainingDate().getDayOfMonth() >= today.getDayOfMonth() );
         return trainingStream.toList();
     }
 

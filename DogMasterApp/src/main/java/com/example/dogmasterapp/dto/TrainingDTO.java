@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public record TrainingDTO(
         TrainingType trainingtype,
         String trainingsNames,
-        LocalDate date
+        LocalDate trainingDate
 ) {
 
 }
