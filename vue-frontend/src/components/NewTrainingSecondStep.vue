@@ -1,60 +1,38 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
 
 const selectedTrainingTypes = ref<string[]>([])
-const allChecked = ref(false)
+const all = ['obedience', 'protection', 'footage']
+
+const allChecked = computed({
+    get: () => selectedTrainingTypes.value.length === all.length,
+    set: (checked: boolean) => {
+        selectedTrainingTypes.value = checked ? [...all] : []
+    },
+})
 
 const emit = defineEmits<{
     (e: 'training-type-select', trainingTypes: string[]): void
 }>()
-
-/**
- * Toggles the state of the selected training types based on the `allChecked` flag.
- * If `allChecked` is true, it clears the `selectedTrainingTypes` array.
- * If `allChecked` is false, sets `selectedTrainingTypes` to a predefined list of training types.
- *
- * Dependencies:
- * - `allChecked` is an observable or reactive reference indicating whether all training types are selected.
- * - `selectedTrainingTypes` is an observable or reactive reference storing the currently selected training types.
- */
-const checkAll = () => {
-    allChecked.value = !allChecked.value
-    if (allChecked.value) {
-        selectedTrainingTypes.value = []
-        // allChecked.value = false
-    } else {
-        selectedTrainingTypes.value = ['obedience', 'protection', 'footage']
-        // allChecked.value = true
-    }
-}
-
-watch(selectedTrainingTypes, () => (allChecked.value = selectedTrainingTypes.value.length === 3))
-
-watch(allChecked, () => (selectedTrainingTypes.value = allChecked.value ? ['obedience', 'protection', 'footage'] : []))
 </script>
 
 <template>
-    <div>
-        <div class="checkbox-buttons-container">
-            <el-checkbox-group v-model="selectedTrainingTypes">
+    <div class="checkbox-buttons-container">
+        <div class="checkbox-row">
+            <el-checkbox-group v-model="selectedTrainingTypes" class="checkbox-group">
                 <el-checkbox class="my-checkbox" label="Obedience" value="obedience" />
                 <el-checkbox class="my-checkbox" label="Protection" value="protection" />
                 <el-checkbox class="my-checkbox" label="Footage" value="footage" />
-                <el-checkbox
-                    class="my-checkbox"
-                    @click="checkAll"
-                    label="Every Discipline"
-                    :value="allChecked"
-                />
             </el-checkbox-group>
 
-            <div style="display: flex; justify-content: space-between; width: 100%">
-                <el-button>Back</el-button>
-                <el-button @click="emit('training-type-select', selectedTrainingTypes)"
-                >Next Step
-                </el-button>
-            </div>
+            <el-checkbox class="my-checkbox" v-model="allChecked" label="Every Discipline" />
+        </div>
+
+        <div style="display: flex; justify-content: space-between; width: 100%">
+            <el-button>Back</el-button>
+            <el-button @click="emit('training-type-select', selectedTrainingTypes)">
+                Next Step
+            </el-button>
         </div>
     </div>
 </template>
@@ -67,11 +45,17 @@ watch(allChecked, () => (selectedTrainingTypes.value = allChecked.value ? ['obed
     gap: 10px;
 }
 
-.checkbox-container {
+.checkbox-row {
     display: flex;
     align-items: center;
-    gap: 16px;
-    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .my-checkbox {
