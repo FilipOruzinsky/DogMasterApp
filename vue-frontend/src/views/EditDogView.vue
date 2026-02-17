@@ -24,9 +24,8 @@ const submitForm = async () => {
         body: JSON.stringify(formData),
     })
         .then((response) => response.json())
-        .then((data) => {
+        .then(() => {
             alert('Dog created successfully')
-            console.log(data)
         })
 }
 </script>

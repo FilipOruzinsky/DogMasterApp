@@ -27,9 +27,8 @@ const submitForm = async () => {
         body: JSON.stringify(formData),
     })
         .then((response) => response.json())
-        .then((data) => {
+        .then(() => {
             alert('User updated successfully')
-            console.log(data)
         })
 }
 
