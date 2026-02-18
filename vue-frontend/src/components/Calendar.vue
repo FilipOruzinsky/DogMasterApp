@@ -2,17 +2,17 @@
 import { ref } from 'vue'
 
 const props = defineProps<{
-    trainingGroup: string
+    trainingType: string
 }>()
 
 const emits = defineEmits<{
     (e: 'date-selected', day: string): void
 }>()
 
-const value = ref(new Date())
+const date = ref(new Date())
 const currentUser = 'Me'
+const selectedDay = ref<string | null>(null)
 
-// Structure matches your Training.java: name/type and list of participants
 interface TrainingDay {
     trainingName: string
     participants: string[]
@@ -30,10 +30,25 @@ const scheduledTrainings = ref<Record<string, TrainingDay>>({
 })
 
 const handleJoinTraining = (day: string) => {
-    // If no training exists on this day, we create a default one
+    // Remove "ME" from previously selected day
+    if (selectedDay.value && selectedDay.value !== day) {
+        const prevTraining = scheduledTrainings.value[selectedDay.value]
+        if (prevTraining) {
+            const prevIndex = prevTraining.participants.indexOf(currentUser)
+            if (prevIndex > -1) {
+                prevTraining.participants.splice(prevIndex, 1)
+                // Cleanup if empty
+                if (prevTraining.participants.length === 0) {
+                    delete scheduledTrainings.value[selectedDay.value]
+                }
+            }
+        }
+    }
+
+    // Toggle for the clicked day
     if (!scheduledTrainings.value[day]) {
         scheduledTrainings.value[day] = {
-            trainingName: props.trainingGroup.toLocaleUpperCase(),
+            trainingName: props.trainingType.toLocaleUpperCase(),
             participants: [],
         }
     }
@@ -42,40 +57,52 @@ const handleJoinTraining = (day: string) => {
     const index = training.participants.indexOf(currentUser)
 
     if (index > -1) {
+        // User is deselecting this day
         training.participants.splice(index, 1)
-        // Cleanup: If nobody is left, remove the training entry entirely
         if (training.participants.length === 0) {
             delete scheduledTrainings.value[day]
         }
+        selectedDay.value = null
     } else {
+        if (training.participants.length > 0) {
+            // User is selecting this day
+            confirm('Would you like to join this training?')
+            training.participants.unshift(currentUser)
+            selectedDay.value = day
+        }
+    }
+    if (training.participants.length === 0){
         training.participants.unshift(currentUser)
+        selectedDay.value = day
     }
 
     emits('date-selected', day)
-    // console.log(scheduledTrainings.value)
 }
 </script>
 
 <template>
-    <el-calendar v-model="value">
+    <el-calendar v-model="date">
         <template #date-cell="{ data }">
             <div class="calendar-cell" @click="handleJoinTraining(data.day)">
                 <div class="day-number">{{ data.day.split('-').slice(2).join('') }}</div>
 
-                <!-- Only show if the day exists AND has at least one person -->
                 <div v-if="scheduledTrainings[data.day]?.participants.length" class="training-info">
                     <div class="training-label">
                         {{ scheduledTrainings[data.day].trainingName }}
                     </div>
 
-                    <!-- Participants horizontal list -->
                     <div class="names-container">
                         <span
                             v-for="(user, index) in scheduledTrainings[data.day].participants"
                             :key="user"
                             :class="['user-name', user === currentUser ? 'is-me' : '']"
                         >
-                            {{ user }}{{ index < scheduledTrainings[data.day].participants.length - 1 ? ', ' : '' }}
+                            {{ user
+                            }}{{
+                                index < scheduledTrainings[data.day].participants.length - 1
+                                    ? ', '
+                                    : ''
+                            }}
                         </span>
                     </div>
                 </div>
