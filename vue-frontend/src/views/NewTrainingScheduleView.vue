@@ -8,6 +8,7 @@ import NewTrainingSecondStep from '@/components/NewTrainingSecondStep.vue'
 import Calendar from '@/components/Calendar.vue'
 import axios from 'axios'
 import keycloak from '@/keycloak.ts'
+import { useRouter } from 'vue-router'
 
 const props = defineProps<{ obrazok: string }>()
 
@@ -16,6 +17,7 @@ const trainingGroup = ref('')
 const trainingTypes = ref<string[]>([])
 const calendarVisible = ref(false)
 const trainingDate = ref('')
+const router = useRouter()
 
 /**
  * Handles the selection of a training option by updating the training group and progressing to the next step.
@@ -57,6 +59,7 @@ const handleSubmit = async () => {
             },
         },
     )
+    router.push('/')
 }
 
 const handleDateSelection = (date: string) => {
@@ -86,7 +89,7 @@ const handleDateSelection = (date: string) => {
             align-center
             :show-close="false"
         >
-            <Calendar :training-group="trainingGroup" @date-selected="handleDateSelection" />
+            <Calendar :training-type="trainingTypes.join(',')" @date-selected="handleDateSelection" />
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="calendarVisible = false">Cancel</el-button>
