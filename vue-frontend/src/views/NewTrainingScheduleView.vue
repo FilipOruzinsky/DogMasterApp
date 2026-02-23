@@ -70,8 +70,6 @@ const handleDateSelection = (date: string) => {
 
 <template>
     <div class="container">
-        <p style="color: white">{{ trainingGroup }}</p>
-        <p style="color: white">{{ trainingTypes }}</p>
         <CalendarAndReturnButton />
         <ProfileForTraining :obrazok="props.obrazok">
             <NewTrainingFirstStep v-if="step === 1" @training-select="handleTrainingSelect" />
