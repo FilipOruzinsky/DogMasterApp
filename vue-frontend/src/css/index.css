@@ -1,25 +1,29 @@
 @import "homeView.css";
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
     font-size: 20px;
 }
-html,body{
-    height:100%;
+
+html, body {
+    height: 100%;
 }
-#app{
+
+#app {
     background-image: url("../images/retaz.png");
     height: 100%;
 }
-button{
+
+button {
     background-color: red !important;
     border: none !important;
     color: black !important;
 }
-.text-white{
+
+.text-white {
     color: white;
 }
 
@@ -37,4 +41,69 @@ button{
 button.el-button--small {
     padding: 15px;
     border-radius: 5px;
+}
+
+.el-message-box {
+    background-color: #101010 !important;
+}
+
+.el-message-box__close {
+    color: black !important;
+    vertical-align: middle;
+}
+
+.el-message-box__headerbtn {
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+}
+
+.el-message-box__title {
+    color: red !important;
+}
+
+.el-message-box__message {
+    color: white !important;
+}
+
+.el-dialog {
+    background-color: black !important;
+}
+
+.el-dialog__title {
+    color: white !important;
+}
+
+.el-calendar {
+    background-color: black !important;
+}
+
+.el-calendar th {
+    color: white !important;
+}
+
+.el-calendar .training-label, .user-name {
+    color: white !important;
+}
+
+.el-calendar__title {
+    color: white !important;
+}
+
+.el-calendar-table {
+    color: white !important;
+}
+
+.el-calendar-table td.is-today {
+    background-color: #101010 !important;
+    color: red !important;
+}
+
+.el-calendar-table .el-calendar-day:hover {
+    background-color: #333 !important;
+}
+
+.el-calendar-table td.is-selected {
+    background-color: #333 !important;
+    color: white !important;
 }
