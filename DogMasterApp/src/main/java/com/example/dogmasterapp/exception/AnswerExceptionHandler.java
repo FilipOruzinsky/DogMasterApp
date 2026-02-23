@@ -11,4 +11,14 @@ public class AnswerExceptionHandler {
     public ResponseEntity<String> handleAnswerNotFoundException(AnswerNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
+
+    @ExceptionHandler(VotingForOwnAnswerException.class)
+    public ResponseEntity<String> handleVotingForOwnAnswerException(VotingForOwnAnswerException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
+
+    @ExceptionHandler(NotOwnerException.class)
+    public ResponseEntity<String> handleNotOwnerException(NotOwnerException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
 }
