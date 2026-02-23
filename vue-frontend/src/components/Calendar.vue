@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useTrainingStore } from '@/store/trainingStore.ts'
+import { ElMessageBox } from 'element-plus'
+
+const trainingStore = useTrainingStore()
 
 const props = defineProps<{
     trainingType: string
@@ -10,71 +14,37 @@ const emits = defineEmits<{
 }>()
 
 const date = ref(new Date())
-const currentUser = 'Me'
 const selectedDay = ref<string | null>(null)
 
-interface TrainingDay {
-    trainingName: string
-    participants: string[]
-}
+const handleJoinTraining = async (day: string) => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const clickedDate = new Date(day)
 
-const scheduledTrainings = ref<Record<string, TrainingDay>>({
-    '2026-02-05': {
-        trainingName: 'Obedience',
-        participants: ['John Doe', 'Jane Smith'],
-    },
-    '2026-02-17': {
-        trainingName: 'Defense',
-        participants: ['Alice Brown', 'Bob Wilson'],
-    },
-})
+    if (clickedDate < today) {
+        ElMessageBox.alert('Nie je možné vytvoriť tréning v minulosti.', 'Pozor', {
+            confirmButtonText: 'OK',
+            type: 'warning',
+        })
+        return
+    }
 
-const handleJoinTraining = (day: string) => {
-    // Remove "ME" from previously selected day
+    const training = trainingStore.scheduledTrainings[day]
+    const isMe = training?.participants.includes(trainingStore.currentUser)
+
+    // Ak deň má iných účastníkov a ja tam nie som — opýtaj sa
+    if (training && !isMe && training.participants.length > 0) {
+        if (!confirm('Would you like to join this training?')) return
+    }
+
+    // Odhlás ma z predchádzajúceho dňa
     if (selectedDay.value && selectedDay.value !== day) {
-        const prevTraining = scheduledTrainings.value[selectedDay.value]
-        if (prevTraining) {
-            const prevIndex = prevTraining.participants.indexOf(currentUser)
-            if (prevIndex > -1) {
-                prevTraining.participants.splice(prevIndex, 1)
-                // Cleanup if empty
-                if (prevTraining.participants.length === 0) {
-                    delete scheduledTrainings.value[selectedDay.value]
-                }
-            }
-        }
-    }
-
-    // Toggle for the clicked day
-    if (!scheduledTrainings.value[day]) {
-        scheduledTrainings.value[day] = {
-            trainingName: props.trainingType.toLocaleUpperCase(),
-            participants: [],
-        }
-    }
-
-    const training = scheduledTrainings.value[day]
-    const index = training.participants.indexOf(currentUser)
-
-    if (index > -1) {
-        // User is deselecting this day
-        training.participants.splice(index, 1)
-        if (training.participants.length === 0) {
-            delete scheduledTrainings.value[day]
-        }
+        trainingStore.joinTraining(selectedDay.value, props.trainingType)
         selectedDay.value = null
-    } else {
-        if (training.participants.length > 0) {
-            // User is selecting this day
-            confirm('Would you like to join this training?')
-            training.participants.unshift(currentUser)
-            selectedDay.value = day
-        }
     }
-    if (training.participants.length === 0){
-        training.participants.unshift(currentUser)
-        selectedDay.value = day
-    }
+
+    trainingStore.joinTraining(day, props.trainingType)
+    selectedDay.value = trainingStore.scheduledTrainings[day] ? day : null
 
     emits('date-selected', day)
 }
@@ -86,20 +56,28 @@ const handleJoinTraining = (day: string) => {
             <div class="calendar-cell" @click="handleJoinTraining(data.day)">
                 <div class="day-number">{{ data.day.split('-').slice(2).join('') }}</div>
 
-                <div v-if="scheduledTrainings[data.day]?.participants.length" class="training-info">
+                <div
+                    v-if="trainingStore.scheduledTrainings[data.day]?.participants.length"
+                    class="training-info"
+                >
                     <div class="training-label">
-                        {{ scheduledTrainings[data.day].trainingName }}
+                        {{ trainingStore.scheduledTrainings[data.day].trainingName }}
                     </div>
 
                     <div class="names-container">
                         <span
-                            v-for="(user, index) in scheduledTrainings[data.day].participants"
+                            v-for="(user, index) in trainingStore.scheduledTrainings[data.day]
+                                .participants"
                             :key="user"
-                            :class="['user-name', user === currentUser ? 'is-me' : '']"
+                            :class="[
+                                'user-name',
+                                user === trainingStore.currentUser ? 'is-me' : '',
+                            ]"
                         >
                             {{ user
                             }}{{
-                                index < scheduledTrainings[data.day].participants.length - 1
+                                index <
+                                trainingStore.scheduledTrainings[data.day].participants.length - 1
                                     ? ', '
                                     : ''
                             }}

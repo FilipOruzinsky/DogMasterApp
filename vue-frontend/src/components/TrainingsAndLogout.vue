@@ -4,11 +4,12 @@ import { ref } from 'vue'
 import keycloak from '@/keycloak.ts'
 import { useRouter } from 'vue-router'
 import Logout from '@/components/Logout.vue';
+import { useTrainingStore } from '@/store/trainingStore.ts'
 
-const doneTrainings = ref(5)
-const scheduledTrainings = ref(2)
+// const doneTrainings = ref(5)
+// const scheduledTrainings = ref(2)
 
-
+const trainingStore = useTrainingStore()
 
 const router = useRouter()
 
@@ -21,8 +22,8 @@ const onClickTrainigs = () => {
 <template>
     <div>
         <div class="trainings">
-            <div class="done">Trainings done {{ doneTrainings }}</div>
-            <div class="scheduled">Scheduled trainings {{ scheduledTrainings }}</div>
+            <div class="done">Trainings done {{ trainingStore.doneTrainings }}</div>
+            <div class="scheduled">Scheduled trainings {{ trainingStore.scheduledCount }}</div>
         </div>
         <div class="action-buttons">
             <el-button type="primary" @click="onClickTrainigs">
@@ -31,7 +32,7 @@ const onClickTrainigs = () => {
                     <List />
                 </el-icon>
             </el-button>
-          <Logout />
+            <Logout />
         </div>
     </div>
 </template>
