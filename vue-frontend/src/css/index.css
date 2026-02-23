@@ -107,3 +107,7 @@ button.el-button--small {
     background-color: #333 !important;
     color: white !important;
 }
+
+.el-overlay {
+    background-color: rgba(20, 20, 20, 0.8);
+}
