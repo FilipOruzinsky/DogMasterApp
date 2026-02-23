@@ -44,7 +44,7 @@ button.el-button--small {
 }
 
 .el-message-box {
-    background-color: #101010 !important;
+    background-color: black !important;
 }
 
 .el-message-box__close {
