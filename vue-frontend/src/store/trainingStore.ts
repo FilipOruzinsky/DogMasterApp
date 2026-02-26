@@ -22,23 +22,25 @@ export const useTrainingStore = defineStore('training', () => {
 
     const doneTrainings = computed(() => {
         const today = new Date()
-
         return Object.entries(scheduledTrainings.value).filter(([date, training]) => {
             const trainingDate = new Date(date)
-            return trainingDate < today && training.participants.includes(currentUser)
+            const trainingDay = new Date(trainingDate.getFullYear(), trainingDate.getMonth(), trainingDate.getDate())
+            const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+            return trainingDay < todayDay && training.participants.includes(currentUser)
         }).length
     })
 
     const scheduledCount = computed(() => {
         const today = new Date()
-
         return Object.entries(scheduledTrainings.value).filter(([date, training]) => {
             const trainingDate = new Date(date)
-            return trainingDate >= today && training.participants.includes(currentUser)
+            const trainingDay = new Date(trainingDate.getFullYear(), trainingDate.getMonth(), trainingDate.getDate())
+            const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+            return trainingDay >= todayDay && training.participants.includes(currentUser)
         }).length
     })
 
-    function joinTraining(day: string, trainingType: string) {
+    const joinTraining = (day: string, trainingType: string): void => {
         if (!scheduledTrainings.value[day]) {
             scheduledTrainings.value[day] = {
                 trainingName: trainingType.toUpperCase(),
@@ -68,4 +70,8 @@ export const useTrainingStore = defineStore('training', () => {
         joinTraining,
         currentUser,
     }
-})
+},
+{
+    persist: true,
+},
+)
