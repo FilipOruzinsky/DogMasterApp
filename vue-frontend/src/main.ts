@@ -5,13 +5,14 @@ import { initKeycloak } from '@/keycloak.ts'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import '@/css/index.css'
-// import 'element-plus/dist/index.css'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createPinia } from 'pinia'
 
 try {
     await initKeycloak()
     const app = createApp(App)
     const pinia = createPinia()
+    pinia.use(piniaPluginPersistedstate)
 
     app.use(pinia)
 
