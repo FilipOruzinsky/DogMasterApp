@@ -112,6 +112,19 @@ const handleJoinTraining = (day: string) => {
 </template>
 
 <style scoped>
+:deep(.calendar-wrapper) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+:deep(.calendar-wrapper .el-calendar) {
+    width: 100%;
+    max-width: 900px;
+}
+
 .calendar-cell {
     height: 100%;
     width: 100%;

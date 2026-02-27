@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import EditProfileView from '@/views/EditProfileView.vue'
 import EditDogView from '@/views/EditDogView.vue'
 import NewTrainingScheduleView from '@/views/NewTrainingScheduleView.vue'
+import Calendar from '@/components/Calendar.vue'
 
 
 const router = createRouter({
@@ -37,6 +38,11 @@ const router = createRouter({
                 obrazok: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
             },
         },
+        {
+            path:'/calendar',
+            name:'calendar',
+            component:Calendar,
+        }
     ],
 })
 
