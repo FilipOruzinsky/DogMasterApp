@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useTrainingStore } from '@/store/trainingStore.ts'
-import { ElMessageBox } from 'element-plus'
+import { ME } from '@/constants'
+import { getDayNumber } from '@/utils'
+import { useMessage } from '@/composables/message.ts'
 
 const trainingStore = useTrainingStore()
+const { showWarningMessage } = useMessage()
 
 const props = defineProps<{
     trainingType: string
@@ -16,24 +19,20 @@ const emits = defineEmits<{
 const date = ref(new Date())
 const selectedDay = ref<string | null>(null)
 
-const handleJoinTraining = async (day: string) => {
+const handleJoinTraining = (day: string) => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     const clickedDate = new Date(day)
 
     if (clickedDate < today) {
-        ElMessageBox.alert('Nie je možné vytvoriť tréning v minulosti.', 'Pozor', {
-            confirmButtonText: 'OK',
-            type: 'warning',
-        })
+        showWarningMessage('Nie je možné vytvoriť tréning v minulosti.', 'Pozor', 'OK')
         return
     }
 
     const training = trainingStore.scheduledTrainings[day]
-    const isMe = training?.participants.includes(trainingStore.currentUser)
 
     // Ak deň má iných účastníkov a ja tam nie som — opýtaj sa
-    if (training && !isMe && training.participants.length > 0) {
+    if (training && !trainingStore.isMeInTraining(training) && training.participants.length > 0) {
         if (!confirm('Would you like to join this training?')) return
     }
 
@@ -48,18 +47,19 @@ const handleJoinTraining = async (day: string) => {
 
     emits('date-selected', day)
 }
+
+const commaOrEmpty = (day: string, index: number): string => {
+    return index < trainingStore.scheduledTrainings[day].participants.length - 1 ? ', ' : ''
+}
 </script>
 
 <template>
     <el-calendar v-model="date">
         <template #date-cell="{ data }">
             <div class="calendar-cell" @click="handleJoinTraining(data.day)">
-                <div class="day-number">{{ data.day.split('-').slice(2).join('') }}</div>
+                <div class="day-number">{{ getDayNumber(data.day) }}</div>
 
-                <div
-                    v-if="trainingStore.scheduledTrainings[data.day]?.participants.length"
-                    class="training-info"
-                >
+                <div v-if="trainingStore.hasParticipants(data.day)" class="training-info">
                     <div class="training-label">
                         {{ trainingStore.scheduledTrainings[data.day].trainingName }}
                     </div>
@@ -69,18 +69,9 @@ const handleJoinTraining = async (day: string) => {
                             v-for="(user, index) in trainingStore.scheduledTrainings[data.day]
                                 .participants"
                             :key="user"
-                            :class="[
-                                'user-name',
-                                user === trainingStore.currentUser ? 'is-me' : '',
-                            ]"
+                            :class="['user-name', user === ME ? 'is-me' : '']"
                         >
-                            {{ user
-                            }}{{
-                                index <
-                                trainingStore.scheduledTrainings[data.day].participants.length - 1
-                                    ? ', '
-                                    : ''
-                            }}
+                            {{ user }}{{ commaOrEmpty(data.day, index) }}
                         </span>
                     </div>
                 </div>
