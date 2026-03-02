@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 const props = defineProps<{
-    trainingType: string
+    trainingType?: string
 }>()
 
 const emits = defineEmits<{
@@ -30,6 +30,9 @@ const scheduledTrainings = ref<Record<string, TrainingDay>>({
 })
 
 const handleJoinTraining = (day: string) => {
+    if (!props.trainingType) {
+        return
+    }
     // Remove "ME" from previously selected day
     if (selectedDay.value && selectedDay.value !== day) {
         const prevTraining = scheduledTrainings.value[selectedDay.value]
@@ -71,7 +74,7 @@ const handleJoinTraining = (day: string) => {
             selectedDay.value = day
         }
     }
-    if (training.participants.length === 0){
+    if (training.participants.length === 0) {
         training.participants.unshift(currentUser)
         selectedDay.value = day
     }
@@ -112,19 +115,6 @@ const handleJoinTraining = (day: string) => {
 </template>
 
 <style scoped>
-:deep(.calendar-wrapper) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-:deep(.calendar-wrapper .el-calendar) {
-    width: 100%;
-    max-width: 900px;
-}
-
 .calendar-cell {
     height: 100%;
     width: 100%;
