@@ -1,22 +1,16 @@
 <script setup lang="ts">
-import { List, Right } from '@element-plus/icons-vue'
-import { ref } from 'vue'
-import keycloak from '@/keycloak.ts'
+import { List } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
-import Logout from '@/components/Logout.vue';
+import Logout from '@/components/Logout.vue'
 import { useTrainingStore } from '@/store/trainingStore.ts'
-
-// const doneTrainings = ref(5)
-// const scheduledTrainings = ref(2)
 
 const trainingStore = useTrainingStore()
 
 const router = useRouter()
 
-const onClickTrainigs = () => {
+const handleScheduleTraining = () => {
     router.push('/new-training')
 }
-
 </script>
 
 <template>
@@ -26,8 +20,8 @@ const onClickTrainigs = () => {
             <div class="scheduled">Scheduled trainings {{ trainingStore.scheduledCount }}</div>
         </div>
         <div class="action-buttons">
-            <el-button type="primary" @click="onClickTrainigs">
-                Scheduled training
+            <el-button type="primary" @click="handleScheduleTraining">
+                Schedule training
                 <el-icon class="el-icon--right">
                     <List />
                 </el-icon>
